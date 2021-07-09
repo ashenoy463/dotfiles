@@ -1,0 +1,75 @@
+
+{
+    "border": "pixel",
+    "current_border_width": 1,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 480,
+       "width": 784,
+       "x": 0,
+       "y": 0
+    },
+    "marks": [],
+    "name": "editor",
+    "percent": 0.5,
+    "swallows": [
+       {
+       "class": "^URxvt$",
+       "instance": "^term1$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "marks": [],
+    "percent": 0.5,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 1,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 480,
+               "width": 784,
+               "x": 0,
+               "y": 0
+            },
+            "marks": [],
+            "name": "files",
+            "percent": 0.5,
+            "swallows": [
+               {
+               "class": "^URxvt$",
+               "instance": "^term2$"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            "border": "pixel",
+            "current_border_width": 1,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 480,
+               "width": 784,
+               "x": 0,
+               "y": 0
+            },
+            "marks": [],
+            "name": "news",
+            "percent": 0.5,
+            "swallows": [
+               {
+               "class": "^URxvt$",
+               "instance": "^term3$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
