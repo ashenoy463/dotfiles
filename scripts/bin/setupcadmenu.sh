@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Create a neat system monitor, volume control, and notepad in tmux
 tmux kill-session -t SysMonitor
 tmux new-session -d -s SysMonitor 'htop'

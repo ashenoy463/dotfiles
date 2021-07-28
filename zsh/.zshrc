@@ -1,6 +1,9 @@
 export PATH=$HOME/bin:$HOME/.local/bin/:$HOME/.cargo/bin:$HOME/go:/usr/local/bin:$PATH
 ZSH_DISABLE_COMPFIX="true"
 
+. ~/.profile
+. "$HOME/.cache/wal/colors.sh"
+
 export ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME="masalaprompt"
@@ -16,46 +19,53 @@ HIST_STAMPS="dd/mm/yyyy"
 
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-plugins=(git zsh-syntax-highlighting colored-man-pages)
+plugins=(zsh-syntax-highlighting colored-man-pages)
 
 source $ZSH/oh-my-zsh.sh
 
+# Set editor
 if [[ -n $SSH_CONNECTION ]]; then
     export EDITOR='vim'
 else
     export EDITOR='nvim'
 fi
 
+# Lazy git bindings
 alias ggrph="git log --graph"
 alias gstat="git status"
 alias gstag="git add -A"
-alias gdiff="git diff"
+alias gdiff="git status -s \
+ | fzf --no-sort --reverse \
+ --preview 'git diff --color=always {+2} | diff-so-fancy' \
+ --bind=ctrl-j:preview-down --bind=ctrl-k:preview-up \
+ --preview-window=right:60%:wrap"
 
 alias -s pdf=zathura
-alias -s epub=epr
+alias -s epub=zathura
 
 alias sctle="sudo systemctl enable"
 alias sctlr="sudo systemctl restart"
 alias sctls="sudo systemctl stop"
 alias sctlstat="sudo systemctl status" 
-
 alias vcsv= "cat data.csv | perl -pe 's/((?<=,)|(?<=^)),/ ,/g;' | column -t -s, | less -S"
 
 alias mpc="mpc --host $MPD_HOST --port $MPD_PORT"
-
-unalias grv
 
 unsetopt PROMPT_SP
 
 export SHELL="/usr/bin/zsh"
 
-. ~/.profile
-
+# Rice bindings
 gibraltar_wallpaper(){
     x=$1;sed -i 's|RICE_WALLPAPER=.*|RICE_WALLPAPER='$x'|' $HOME/.profile
     $HOME/bin/i3start.sh
 }
+gibraltar_override(){
+    x=$1;sed -i 's|RICE_OVERRIDETHEME=.*|RICE_OVERRIDETHEME='$x'|' $HOME/.profile
+    $HOME/bin/i3start.sh
+}
 
+# Add rss to newsboat
 rss_add(){
     if [ $2 != "" ]
     then
@@ -65,4 +75,29 @@ rss_add(){
     fi
 }
 
-. "$HOME/.cache/wal/colors.sh"
+# Open interactive fzf session
+function cd() {
+    if [[ "$#" != 0 ]]; then
+        builtin cd "$@";
+        return
+    fi
+    while true; do
+        local lsd=$(echo ".." && ls -p | grep '/$' | sed 's;/$;;')
+        local dir="$(printf '%s\n' "${lsd[@]}" |
+            fzf --reverse --preview '
+                __cd_nxt="$(echo {})";
+                __cd_path="$(echo $(pwd)/${__cd_nxt} | sed "s;//;/;")";
+                echo $__cd_path;
+                echo;
+                ls -p --color=always "${__cd_path}";
+        ')"
+        [[ ${#dir} != 0 ]] || return 0
+        builtin cd "$dir" &> /dev/null
+    done
+}
+
+# Base16 Shell
+export BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"

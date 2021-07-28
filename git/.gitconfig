@@ -1,3 +1,5 @@
 [user]
 	email = masala_man@protonmail.com
     name = Ayush Shenoy
+[init]
+	defaultBranch = main

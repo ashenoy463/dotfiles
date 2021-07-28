@@ -22,10 +22,7 @@
 *.color15: #fdf6e3
 
 !! URxvt Appearance
-!!sucks
-URxvt.font: xft:Roboto Mono Medium:size=10,xft:DejaVu Sans Mono
-!!Branch works and so does texttype in vim but not the linux glyph
-!URxvt*font: xft:RobotoMono Nerd Font:pixelsize=13,xft:Symbola:pixelsize=13
+URxvt*font: xft:RobotoMono Nerd Font:pixelsize=13:style=Medium
 URxvt.letterSpace: 0
 URxvt.lineSpace: 0
 URxvt.geometry: 92x24

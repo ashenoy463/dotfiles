@@ -1,0 +1,16 @@
+insidecolor=00000000
+ringcolor=ffffffff
+keyhlcolor={color4.strip}ff
+bshlcolor={color4.strip}ff
+separatorcolor=00000000
+insidevercolor={color3.strip}ff
+insidewrongcolor={color1.strip}ff
+ringvercolor=ffffffff
+ringwrongcolor=ffffffff
+verifcolor={color2.strip}ff
+timecolor={foreground.strip}ff
+datecolor={foreground.strip}ff
+loginbox={background.strip}66
+font="Roboto Mono Medium"
+locktext="Ayush Shenoy"
+lock_timeout=0

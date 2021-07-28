@@ -7,13 +7,14 @@
 # INITIALIZATION
 #
 ## Default Programs
-
+set $terminal st
 set $music "urxvt -name drop_music -hold -e ncmpcpp"
 set $calc "urxvt -name drop_calc -hold -e bc"
 set $monitor "urxvt -name drop_monitor -hold -e ~/bin/setupcadmenu.sh" 
-exec_always $music
+exec_always killall urxvt
 exec_always $calc
-exec_always $monitor 
+exec_always $monitor
+exec_always $music
 #
 #
 # CORE DISPLAY
@@ -40,28 +41,29 @@ set $mod Mod4
 bindsym $mod+Shift+q kill
 #
 ## Start Terminal
-bindsym $mod+Return exec terminal
+bindsym $mod+Return exec $terminal
 #
 ## Application Launcher
-bindsym $mod+d exec dmenu_recency -b -nb "$term_color0" -nf "$term_color15" -sb "$term_color1" -sf "$term_color15"
+#bindsym $mod+d exec dmenu_recency -b -nb "$term_color0" -nf "$term_color15" -sb "$term_color1" -sf "$term_color15"
+bindsym $mod+d exec rofi -font "Roboto Mono Medium 10" -show run
 #
 ## launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
 #
 ## Lock screen
-bindsym $mod+l exec ~/bin/lock.sh
+bindsym $mod+Ctrl+l exec ~/bin/lock.sh
 #
 ## Notifications Pause
-# tes
+# TODO
 #
-## reload the configuration file
+## Reload Config
 bindsym $mod+Shift+c reload
 #
-## restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+## Restart i3 in-place
 bindsym $mod+Shift+r restart
 #
-## exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+## Power Menu
+bindsym $mod+Ctrl+e exec ~/bin/powermenu.sh 
 #
 #
 # ANCILLARY KEYBINDS
@@ -74,9 +76,9 @@ bindsym $mod+F5 exec terminal -e 'mocp'
 bindsym $mod+t exec --no-startup-id pkill picom
 bindsym $mod+Ctrl+t exec --no-startup-id picom -b
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
-bindsym Print exec --no-startup-id i3-scrot
-bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
-bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
+bindsym Print exec --no-startup-id bash ~/bin/screenshot.sh -s
+bindsym $mod+Print --release exec --no-startup-id bash ~/bin/screenshot.sh -r
+bindsym $mod+Shift+Print --release exec --no-startup-id bash ~/bin/screenshot.sh -r -t 5
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 #
 ## Move to scratchpad
@@ -155,10 +157,10 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 ## Application-specific Bindings
 #
 ### Open applications on specific workspaces
-#assign [class="firefox"] $ws3
 assign [class="discord"] $ws4
+assign [class="code"] $ws1
 ### Open specific applications in floating mode
-for_window [title="alsamixer"] floating enable border pixel 1
+#for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="calamares"] floating enable border normal
 for_window [class="Clipgrab"] floating enable
 for_window [title="File Transfer*"] floating enable
@@ -185,6 +187,7 @@ for_window [class="Skype"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
+for_window [class="sxiv"] floating enable
 for_window [title="Picture-in-Picture"] floating enable sticky enable border pixel 1
 #
 #
@@ -280,13 +283,25 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 #
+## Vimbinds
+### Move Focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+### Move Window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+#
 ## workspace back and forth (with/without active container)
 workspace_auto_back_and_forth yes
-bindsym $mod+b workspace back_and_forth
+#bindsym $mod+b workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 #
 ## split orientation
-bindsym $mod+h split h
+bindsym $mod+b split h
 bindsym $mod+v split v
 bindsym $mod+q split toggle
 #

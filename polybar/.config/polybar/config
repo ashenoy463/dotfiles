@@ -30,9 +30,9 @@ module-margin-right = 2
 
 font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
+font-2 = RobotoMono Nerd Font:pixelsize=13:style=Medium;1
 
-modules-left = i3
+modules-left = i3 title
 modules-center = mpd
 modules-right = alsa eth date
 
@@ -79,22 +79,29 @@ label-urgent-padding = 2
 ; Separator in between workspaces
 ; label-separator = |
 
+[module/title]
+type = internal/xwindow
+label-maxlen = 30
 
 [module/mpd]
 type = internal/mpd
-format-online = <toggle> <label-song>
+format-online = <icon-prev> <toggle> <icon-next> <bar-progress>
 host = 127.0.0.1
 port = 9092
-;icon-prev = 
-;icon-stop = 
-;icon-play = 
-;icon-pause = 
-;icon-next = 
-icon-play = [PLAY]
-icon-pause = [PAUSE]
+icon-prev = 玲
+icon-stop = 栗
+icon-next = 怜
+icon-play = 契
+icon-pause = 
+label-song = %artist% - %title% (%album%)
 label-song-maxlen = 50
 label-song-ellipsis = true
 format-underline= ${colors.primary}
+bar-progress-width = 20
+bar-progress-indicator = |
+bar-progress-fill = ─
+bar-progress-empty = ─
+bar-progress-fill-foreground = ${colors.primary}
 
 [module/eth]
 type = internal/network
@@ -102,7 +109,7 @@ interface = enp4s0
 interval = 3.0
 
 format-connected-underline = ${colors.primary}
-format-connected-prefix = " "
+format-connected =   <label-connected>
 format-connected-prefix-foreground = ${colors.foreground}
 label-connected = %local_ip%
 
@@ -115,7 +122,7 @@ label-disconnected-foreground = ${colors.foreground-alt}
 type = internal/date
 interval = 5
 
-date = %a
+date =   %a
 date-alt = "%A %d-%m-%Y"
 
 time = %I:%M %p
@@ -131,13 +138,12 @@ label = %date% %time%
 type = internal/alsa
 
 format-volume = <label-volume> <bar-volume>
-label-volume = VOL
+label-volume = Vol. %percentage%
 label-volume-foreground = ${root.foreground}
-;format-volume-underline = ${colors.primary}
 
-format-muted-prefix = " "
+format-muted-prefix = "ﱝ "
 format-muted-foreground = ${colors.foreground-alt}
-label-muted = MUTE
+label-muted = Muted
 
 bar-volume-width = 10
 bar-volume-foreground-0 = ${colors.primary}
@@ -155,35 +161,6 @@ bar-volume-fill-font = 2
 bar-volume-empty = ─
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
-
-[module/powermenu]
-type = custom/menu
-
-expand-right = true
-
-format-spacing = 1
-
-label-open = [X]   
-label-open-foreground = ${colors.secondary}
-label-close =  cancel
-label-close-foreground = ${colors.secondary}
-label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
-
-menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
-menu-0-1 = power off
-menu-0-1-exec = menu-open-2
-
-menu-1-0 = cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
-
-menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
-menu-2-1 = cancel
-menu-2-1-exec = menu-open-0
 
 [settings]
 screenchange-reload = true

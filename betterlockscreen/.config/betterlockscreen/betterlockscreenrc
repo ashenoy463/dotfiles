@@ -1,18 +1,16 @@
-# configuration file for betterlockscreen
-
 insidecolor=00000000
 ringcolor=ffffffff
-keyhlcolor=d23c3dff
-bshlcolor=d23c3dff
+keyhlcolor=6699CCff
+bshlcolor=6699CCff
 separatorcolor=00000000
-insidevercolor=f3f99dff
-insidewrongcolor=ff5c57ff
+insidevercolor=FAC863ff
+insidewrongcolor=EC5f67ff
 ringvercolor=ffffffff
 ringwrongcolor=ffffffff
-verifcolor=5af78eff
-timecolor=ffffffff
-datecolor=ffffffff
-loginbox=3f343f66
+verifcolor=99C794ff
+timecolor=C0C5CEff
+datecolor=C0C5CEff
+loginbox=1B2B3466
 font="Roboto Mono Medium"
-locktext="Ayush henoy"
+locktext="Ayush Shenoy"
 lock_timeout=0

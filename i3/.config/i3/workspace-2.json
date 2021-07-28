@@ -14,8 +14,8 @@
     "percent": 0.5,
     "swallows": [
        {
-       "class": "^URxvt$",
-       "instance": "^term1$"
+       "class": "^st-256color$",
+       "title": "^term1$"
        }
     ],
     "type": "con"
@@ -44,8 +44,8 @@
             "percent": 0.5,
             "swallows": [
                {
-               "class": "^URxvt$",
-               "instance": "^term2$"
+               "class": "^st-256color$",
+               "title": "^term2$"
                }
             ],
             "type": "con"
@@ -65,8 +65,8 @@
             "percent": 0.5,
             "swallows": [
                {
-               "class": "^URxvt$",
-               "instance": "^term3$"
+               "class": "^st-256color$",
+               "title": "^term3$"
                }
             ],
             "type": "con"
