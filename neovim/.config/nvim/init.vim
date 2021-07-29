@@ -66,7 +66,6 @@ set incsearch
 hi TabLineFill ctermfg=Blue ctermbg=Red
 hi TabLineSel ctermfg=Black ctermbg=Blue
 hi Pmenu ctermbg=Blue
-highlight VertSplit ctermbg=none
 
 " Misc
 set hidden
@@ -91,7 +90,7 @@ set shiftwidth=4
 
 " Split Separator
 set encoding=utf8
-set fillchars+=vert:\|
+set fillchars+=vert:\│
 
 " Airline
 if !exists('g:airline_symbols')
@@ -165,7 +164,7 @@ nnoremap <C-O> :NERDTreeToggle<CR><C-L>
 inoremap <C-T> <esc>:TagbarToggle<CR><C-L>i
 inoremap <C-O> <esc>:NERDTreeToggle<CR><C-L>i
 nnoremap <C-U> :UndotreeToggle<CR>
-nnoremap <leader>g :Goyo<CR> 
+nnoremap <leader>g :Goyo<CR>
 " Linting
 nnoremap <C-N> :ALEToggle<CR>
 " Escape Buffer

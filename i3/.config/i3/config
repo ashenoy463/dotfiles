@@ -11,10 +11,6 @@ set $terminal st
 set $music "urxvt -name drop_music -hold -e ncmpcpp"
 set $calc "urxvt -name drop_calc -hold -e bc"
 set $monitor "urxvt -name drop_monitor -hold -e ~/bin/setupcadmenu.sh" 
-exec_always killall urxvt
-exec_always $calc
-exec_always $monitor
-exec_always $music
 #
 #
 # CORE DISPLAY
@@ -99,6 +95,13 @@ for_window[instance="drop_calc"] resize set 500 300
 for_window[instance="drop_calc"] move absolute position 550 -20
 for_window[instance="drop_calc"] move scratchpad
 for_window[instance="drop_music"] move absolute position center
+#
+## Scratchpad Startup
+exec_always "pgrep -f urxvt\ -name\ drop_ | xargs kill"
+exec_always $calc
+exec_always $monitor
+exec_always $music
+#
 ## Scratchpad Bindings
 bindsym $mod+m [instance="drop_music"] scratchpad show
 bindsym $mod+Delete [instance="drop_monitor"] scratchpad show
