@@ -12,8 +12,8 @@ mv $HOME/.cache/wal/dunstrc $HOME/.config/dunst/dunstrc
 mv $HOME/.cache/wal/betterlockscreenrc $HOME/.config/betterlockscreenrc
 
 # Restart Processes
-pkill picom; dunst &
-pkill dunst; picom -b --config $CONF_PICOM &
+pkill dunst; dunst &
+pkill picom; picom -b --config $CONF_PICOM &
 
 # Update lockscreen image
 betterlockscreen -u $RICE_WALLPAPER && notify-send -u low "Gibraltar Notification" "Lockscreen image updated"

@@ -49,6 +49,11 @@ bindsym $mod+o exec rofi -font "Roboto Mono Medium 10" -show filebrowser
 ## Lock screen
 bindsym $mod+Ctrl+l exec ~/bin/lock.sh
 #
+## Notification Hotkeys
+bindsym Ctrl+grave exec dunstctl history-pop
+bindsym Ctrl+space exec dunstctl close
+bindsym Ctrl+Shift+space exec dunstctl close-all
+#
 ## Notifications Pause
 # TODO
 #
@@ -67,11 +72,6 @@ bindsym $mod+Ctrl+e exec ~/bin/powermenu.sh
 ## Start Applications
 bindsym $mod+F2 exec firefox
 bindsym $mod+F3 exec ranger
-bindsym $mod+Shift+F3 exec pcmanfm_pkexec
-bindsym $mod+F5 exec terminal -e 'mocp'
-bindsym $mod+t exec --no-startup-id pkill picom
-bindsym $mod+Ctrl+t exec --no-startup-id picom -b
-bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
 bindsym Print exec --no-startup-id bash ~/bin/screenshot.sh -s
 bindsym $mod+Print --release exec --no-startup-id bash ~/bin/screenshot.sh -r
 bindsym $mod+Shift+Print --release exec --no-startup-id bash ~/bin/screenshot.sh -r -t 5
