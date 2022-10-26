@@ -17,6 +17,7 @@ gibraltar_wallpaper ~/Wallpapers/mywallpaper.png
 
 ## Screenshots
 
-![](https://cdn.discordapp.com/attachments/730969252865245267/863111438594736148/2021-07-09-230519_1600x900_scrot.png)
-![](https://media.discordapp.net/attachments/730969252865245267/863112836065919026/2021-07-09-231115_1600x900_scrot.png)
-![](https://media.discordapp.net/attachments/730969252865245267/863112836631494656/2021-07-09-231052_1600x900_scrot.png)
+![](https://i.imgur.com/cOECjNA.png)
+![](https://i.imgur.com/MyOye8W.png)
+![](https://i.imgur.com/Edn76VK.png)
+![](https://i.imgur.com/HdkYQDq.png)
