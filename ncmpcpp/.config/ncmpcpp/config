@@ -101,11 +101,11 @@ visualizer_in_stereo = yes
 #
 ## Available values: spectrum, wave, wave_filled, ellipse.
 ##
-visualizer_type = spectrum
+visualizer_type = wave_filled
 #
-#visualizer_fps = 60
+visualizer_fps = 30
 #
-#visualizer_autoscale = no
+visualizer_autoscale = yes
 #
 visualizer_look = "+|"
 #
@@ -113,7 +113,7 @@ visualizer_look = "+|"
 #
 ## Alternative subset of 256 colors for terminals that support it.
 ##
-visualizer_color = 47, 83, 119, 155, 191, 227, 221, 215, 209, 203, 197, 161
+#visualizer_color = 47, 83, 119, 155, 191, 227, 221, 215, 209, 203, 197, 161
 #
 ##
 ## Note: The next few visualization options apply to the spectrum visualizer.
@@ -322,7 +322,7 @@ song_columns_list_format = (20)[]{a} (6f)[green]{NE} (50)[white]{t|f:Title} (20)
 ## Note: Custom command that will be executed each time song changes. Useful for
 ## notifications etc.
 ##
-#execute_on_song_change = ""
+execute_on_song_change = "~/bin/mpdnotify.sh"
 #
 ##
 ## Note: Custom command that will be executed each time player state
@@ -383,7 +383,7 @@ user_interface = alternative
 #
 ## Available values: artist, album_artist, date, genre, composer, performer.
 ##
-#media_library_primary_tag = artist
+media_library_primary_tag = genre
 #
 #media_library_albums_split_by_date = yes
 #
@@ -511,7 +511,7 @@ startup_screen = browser
 #
 #block_search_constraints_change_if_items_found = yes
 #
-#mouse_support = yes
+mouse_support = yes
 #
 #mouse_list_scroll_whole_page = no
 #
