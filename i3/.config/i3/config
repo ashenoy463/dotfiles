@@ -8,9 +8,6 @@
 #
 ## Default Programs
 set $terminal st
-set $music "urxvt -name drop_music -hold -e ncmpcpp"
-set $calc "urxvt -name drop_calc -hold -e bc"
-set $monitor "urxvt -name drop_monitor -hold -e ~/bin/setupcadmenu.sh" 
 #
 #
 # CORE DISPLAY
@@ -43,8 +40,11 @@ bindsym $mod+Return exec $terminal
 #bindsym $mod+d exec dmenu_recency -b -nb "$term_color0" -nf "$term_color15" -sb "$term_color1" -sf "$term_color15"
 bindsym $mod+d exec rofi -font "Roboto Mono Medium 10" -show run
 #
-## launch categorized menu
-bindsym $mod+z exec --no-startup-id morc_menu
+## Window Switcher
+bindsym $mod+x exec rofi -font "Roboto Mono Medium 10" -show window
+#
+## File Browser
+bindsym $mod+o exec rofi -font "Roboto Mono Medium 10" -show filebrowser
 #
 ## Lock screen
 bindsym $mod+Ctrl+l exec ~/bin/lock.sh
@@ -96,12 +96,8 @@ for_window[instance="drop_calc"] move absolute position 550 -20
 for_window[instance="drop_calc"] move scratchpad
 for_window[instance="drop_music"] move absolute position center
 #
-## Scratchpad Startup
-exec_always "pgrep -f urxvt\ -name\ drop_ | xargs kill"
-exec_always $calc
-exec_always $monitor
-exec_always $music
-#
+# Initialize scratchpads
+exec_always ~/bin/i3scratchpads.sh
 ## Scratchpad Bindings
 bindsym $mod+m [instance="drop_music"] scratchpad show
 bindsym $mod+Delete [instance="drop_monitor"] scratchpad show

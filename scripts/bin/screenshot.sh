@@ -12,11 +12,11 @@ then
     if [ $2 == "-t" ]
     then
         sleep "$3"
-        cd /home/ayush/Pictures/Screenshots
+        cd $HOME/Pictures/Screenshots
         scrot -s
         uploadshot
     else
-        cd /home/ayush/Pictures/Screenshots
+        cd $HOME/Pictures/Screenshots
         scrot -s
         uploadshot
     fi   
@@ -27,11 +27,11 @@ then
     if [ $2 == "-t" ]
     then
         sleep "$3"
-        cd /home/ayush/Pictures/Screenshots
+        cd $HOME/Pictures/Screenshots
         scrot
         uploadshot
     else
-        cd /home/ayush/Pictures/Screenshots
+        cd $HOME/Pictures/Screenshots
         scrot
         uploadshot
     fi

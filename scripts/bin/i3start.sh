@@ -2,12 +2,8 @@
 # Get variables
 . ~/.profile
 
-# Kill processes
-pkill picom
-pkill dunst
-
 # Get colors from override theme and set wallpaper OR get colors from wallpaper
-wal --theme $RICE_THEME && feh --bg-scale $RICE_WALLPAPER && notify-send -u low "Gibraltar Notification" "Wallpaper set with override theme" || wal -i $RICE_WALLPAPER && notify-send -u "Gibraltar Notification" "Wallpaper set with generated theme"
+wal --theme $RICE_THEME && feh --bg-scale $RICE_WALLPAPER && notify-send -u low "Gibraltar Notification" "Wallpaper set with override theme" || wal -i $RICE_WALLPAPER && notify-send -u low "Gibraltar Notification" "Wallpaper set with generated theme"
 # Update Discord theme
 pywal-discord
 
@@ -15,9 +11,9 @@ pywal-discord
 mv $HOME/.cache/wal/dunstrc $HOME/.config/dunst/dunstrc
 mv $HOME/.cache/wal/betterlockscreenrc $HOME/.config/betterlockscreenrc
 
-# Restart processes
-picom -b --config $CONF_PICOM
-dunst &
+# Restart Processes
+pkill picom; dunst &
+pkill dunst; picom -b --config $CONF_PICOM &
 
 # Update lockscreen image
-betterlockscreen -u $RICE_WALLPAPER && notify-send -u low "Gibraltar Notifiation" "Lockscreen image updated"
+betterlockscreen -u $RICE_WALLPAPER && notify-send -u low "Gibraltar Notification" "Lockscreen image updated"

@@ -33,10 +33,10 @@ font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = RobotoMono Nerd Font:pixelsize=13:style=Medium;1
 
 modules-left = i3 title
-modules-center = mpd
+;modules-center = mpd
 modules-right = alsa eth date
 
-tray-position = right
+tray-position = center
 tray-padding = 2
 
 cursor-click = pointer
@@ -85,11 +85,11 @@ label-maxlen = 30
 
 [module/mpd]
 type = internal/mpd
-format-online = <icon-prev> <toggle> <icon-next> <bar-progress>
+format-online = <icon-prev> <toggle> <icon-next> <bar-progress> <label-song>
 host = 127.0.0.1
 port = 9092
 icon-prev = 玲
-icon-stop = 栗
+icon-stop = 
 icon-next = 怜
 icon-play = 契
 icon-pause = 
@@ -99,9 +99,12 @@ label-song-ellipsis = true
 format-underline= ${colors.primary}
 bar-progress-width = 20
 bar-progress-indicator = |
-bar-progress-fill = ─
-bar-progress-empty = ─
-bar-progress-fill-foreground = ${colors.primary}
+bar-progress-fill = "-"
+; above char doesn't work for some reason, temp workaround:
+;bar-progress-fill = "-"
+bar-progress-empty = " "
+bar-progress-fill-foreground = "${colors.primary}
+label-offline = <--/--mpd--/-->
 
 [module/eth]
 type = internal/network
@@ -156,9 +159,9 @@ bar-volume-foreground-6 = ${colors.primary}
 bar-volume-gradient = false
 bar-volume-indicator = |
 bar-volume-indicator-font = 2
-bar-volume-fill = ─
+bar-volume-fill = -
 bar-volume-fill-font = 2
-bar-volume-empty = ─
+bar-volume-empty = " "
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
 
