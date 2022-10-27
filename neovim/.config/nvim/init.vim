@@ -28,8 +28,9 @@ Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
 Plug 'ncm2/ncm2-cssomni'
 Plug 'lervag/vimtex'
+Plug 'brennier/quicktex'
 Plug 'ncm2/ncm2-jedi'
-Plug 'jiangmiao/auto-pairs'
+"Plug 'jiangmiao/auto-pairs'
 Plug 'ncm2/ncm2-ultisnips'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -51,7 +52,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'ryanoasis/vim-devicons'
-Plug 'Yggdroot/indentLine'
+"Plug 'Yggdroot/indentLine'
 Plug 'scrooloose/nerdtree'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-startify'
@@ -74,7 +75,8 @@ set incsearch
 hi TabLineFill ctermfg=Blue ctermbg=Red
 hi TabLineSel ctermfg=Black ctermbg=Blue
 hi Pmenu ctermbg=Blue
-hi! Conceal ctermfg=Blue
+hi! Conceal ctermfg=White
+hi Conceal cterm=bold
 
 " Misc
 set hidden
@@ -249,10 +251,6 @@ autocmd BufWritePost .zshrc !source %
 autocmd Filetype tex setl updatetime=1000
 let g:livepreview_previewer = 'zathura'
 nnoremap <leader>v :VimtexCompile<CR>
-"function! ClearTex()
-    "execute "VimtexStopAll"
-    "execute "VimtexClean"
-"endfunction
 autocmd VimLeave *.tex !texclear.sh %
 autocmd FileType tex nnoremap <buffer> <C-T> :VimtexTocToggle<CR><C-L>
 autocmd FileType tex inoremap <buffer> <C-T> <esc>:VimtexTocToggle<CR><C-L>i
@@ -267,6 +265,8 @@ let g:vimtex_toc_config = {
       \ 'mode' : 2,
       \}
 let g:indentLine_fileTypeExclude = ['tex']
+" Quicktex snippets
+source ~/.config/nvim/tex.vim
 
 " Training Wheels
 inoremap <Left> <nop>

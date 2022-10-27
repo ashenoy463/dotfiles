@@ -271,10 +271,10 @@ mode "$mode_gaps_outer" {
 focus_follows_mouse no
 #
 ## Move Focus
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+#bindsym $mod+Left focus left
+#bindsym $mod+Down focus down
+#bindsym $mod+Up focus up
+#bindsym $mod+Right focus right
 #
 ## Move Window
 bindsym $mod+Shift+Left move left
