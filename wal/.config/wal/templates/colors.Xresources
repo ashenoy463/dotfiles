@@ -65,7 +65,7 @@ XClock*minuteColor: rgba:{color15.xrgba}
 XClock*secondColor: rgba:{color15.xrgba}
 
 !! URxvt Appearance
-URxvt*font: xft:RobotoMono Nerd Font:pixelsize=13:style=Medium
+URxvt*font: xft:RobotoMono Nerd Font Mono:pixelsize=12:style=Medium
 URxvt.letterSpace: 0
 URxvt.lineSpace: 0
 URxvt.geometry: 92x24

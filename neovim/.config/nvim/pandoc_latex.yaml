@@ -1,0 +1,10 @@
+---
+header-includes: |
+            \usepackage{physics}
+            \usepackage{amsmath}
+            \usepackage{amssymb}
+            \DeclareMathOperator{\Forall}{\forall}
+            \DeclareMathOperator{\Exists}{\exists}
+            \DeclareMathOperator{\Nexist}{\nexist}
+---
+

@@ -4,17 +4,18 @@
 " tested on Manjaro 21.0.7 Ornara
 "---------------------------------
 "
-" Make sure plugin manager is insatlled
+" Make sure plugin manager is installed
 if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
-	echo "Downloading junegunn/vim-plug to manage plugins..."
-	silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
-	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
-	autocmd VimEnter * PlugInstall
+    echo "Downloading junegunn/vim-plug to manage plugins..."
+    silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
+    silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
+    autocmd VimEnter * PlugInstall
 endif
 " Env Variables
 "
 let g:python_host_prog = '/usr/bin/python2'
 let g:python3_host_prog = '/usr/bin/python3'
+let $VIMHOME = '/home/ayush/.config/nvim'
 " Plugins
 "
 call plug#begin()
@@ -27,41 +28,41 @@ Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
 Plug 'ncm2/ncm2-cssomni'
-Plug 'lervag/vimtex'
-Plug 'brennier/quicktex'
 Plug 'ncm2/ncm2-jedi'
-"Plug 'jiangmiao/auto-pairs'
+Plug 'ncm2/ncm2-match-highlight'
 Plug 'ncm2/ncm2-ultisnips'
+Plug 'lervag/vimtex'
+Plug 'jiangmiao/auto-pairs'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'ncm2/ncm2-match-highlight'
 " Formatting and Linting
 Plug 'dense-analysis/ale'
 Plug 'Chiel92/vim-autoformat'
 Plug 'sheerun/vim-polyglot'
 Plug 'scrooloose/nerdcommenter'
-Plug 'elzr/vim-json'
-Plug 'rust-lang/rust.vim'
 " Git
-Plug 'tpope/vim-fugitive'
+Plug 'jreybert/vimagit'
 Plug 'airblade/vim-gitgutter'
 Plug 'xuyuanp/nerdtree-git-plugin'
 " UI Features
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+Plug 'BurntSushi/ripgrep'
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'junegunn/goyo.vim'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'ryanoasis/vim-devicons'
-"Plug 'Yggdroot/indentLine'
+Plug 'francoiscabrol/ranger.vim'
+Plug 'Yggdroot/indentLine'
 Plug 'scrooloose/nerdtree'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-startify'
 Plug 'mbbill/undotree'
 Plug 'lilydjwg/colorizer'
 " Others
-Plug 'chrisbra/Colorizer'
+Plug 'nvim-lua/plenary.nvim' "Required for telescope
+Plug 'rbgrouleff/bclose.vim' " Required for ranger
 Plug 'dylanaraps/wal.vim'
 Plug 'masala-man/vimala'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 call plug#end()
 
 " UI
@@ -84,7 +85,8 @@ set mouse=a
 set noshowmode
 set noshowmatch
 set nolazyredraw
-"set laststatus=3
+filetype plugin on
+set clipboard=unnamedplus
 
 " Backup
 set nobackup
@@ -108,7 +110,7 @@ highlight Vertsplit ctermfg=grey
 
 " Airline
 if !exists('g:airline_symbols')
-	let g:airline_symbols = {}
+    let g:airline_symbols = {}
 endif
 let g:airline_symbols.branch = ''
 "autocmd VimEnter * AirlineTheme snazzy
@@ -121,7 +123,7 @@ highlight GitGutterDelete ctermfg=red
 highlight GitGutterChangeDelete ctermfg=yellow
 
 " ALE
-let g:ale_sign_highlight_linenrs = 1
+let g:ale_sign_highlight_linenrs = 0
 let g:ale_sign_error = '!!'
 let g:ale_sign_warning = '..'
 highlight ALEErrorSign ctermfg=red ctermbg=black
@@ -131,8 +133,8 @@ let g:airline#extensions#ale#warning_symbol = '..'
 highlight ALEErrorSignLineNr ctermfg=red ctermbg=black
 let g:airline#extensions#ale#enabled = 1
 let g:ale_linters = {'python': ['flake8'], 'rust': ['cargo']}
-let g:ale_fixers = {'python': ['autoflake'],'rust': ['rustfmt']}
-let g:ale_fix_on_save = 1
+let g:ale_fixers = {'python': ['autoflake'],'rust': ['rustfmt'], '*': ['remove_trailing_lines', 'trim_whitespace']}
+let g:ale_fix_on_save = 0
 autocmd VimEnter *.py ALEDisable
 autocmd VimEnter *.tex ALEDisable
 
@@ -141,7 +143,7 @@ autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 set shortmess+=c
 au BufEnter * call ncm2#enable_for_buffer()
-au User Ncm2Plugin call ncm2#register_source({
+au Filetype tex call ncm2#register_source({
             \ 'name' : 'vimtex',
             \ 'priority': 1,
             \ 'subscope_enable': 1,
@@ -163,13 +165,10 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <silent> <expr> <CR> ((pumvisible() && empty(v:completed_item)) ?  "\<c-y>\<cr>" : (!empty(v:completed_item) ? ncm2_ultisnips#expand_or("", 'n') : "\<CR>" ))
 
-" c-j c-k for moving in snippet
-imap <expr> <c-u> ncm2_ultisnips#expand_or("\<Plug>(ultisnips_expand)", 'm')
-smap <c-u> <Plug>(ultisnips_expand)
-let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
-let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
-let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
-let g:UltiSnipsRemoveSelectModeMappings = 0
+" Ultisnips
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 
 " NERDtree
 let NERDTreeShowBookmarks=1
@@ -179,8 +178,14 @@ let g:NERDTreePatternMatchHighlightFullName = 1
 let g:NERDTreeHighlightFolders = 1
 let g:NERDTreeHighlightFoldersFullName = 1
 
-" Startify
+" Indentline
+"let g:indentLine_fileTypeExclude = ['tex','markdown']
+"let g:indentLine_char = '|'
+"let g:indentLine_conceallevel = 1
 "autocmd * StartifyReady IndentLinesDisable
+
+
+" Startify
 let g:startify_custom_header = [
 \ '                  __                 ',
 \ '   ___    __  __ /\_\     _______    ',
@@ -205,8 +210,6 @@ nnoremap <C-Q> :Startify<CR><C-L>
 " Easier splits
 nnoremap <leader>= :vsplit<CR>
 nnoremap <leader>- :split<CR>
-"nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
-"nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 
 " Split Movement
 nnoremap <C-h> <C-w>h
@@ -214,44 +217,43 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" Swati Corpus Shortcuts
-inoremap <leader>pal $PALLAVI<CR>
-inoremap <leader>anu $ANUPALLAVI<CR>
-inoremap <leader>car $CHARANAM<CR>
-"Ought to be ultisnipped
-
 " Indic Transliteration
 nnoremap <leader><leader>i :call ToggleVimalaKolkataUTF8()<cr>
 inoremap <leader><leader>i <esc>:call ToggleVimalaKolkataUTF8()<cr>a
 nnoremap <leader><leader>l :call ToggleVimalaKolkataLatexVanilla()<cr>
 inoremap <leader><leader>l <esc>:call ToggleVimalaKolkataLatexVanilla()<cr>a
 
-" Easy linebreaks
+" Easy line breaks
 function! BreakHere()
-	s/^\(\s*\)\(.\{-}\)\(\s*\)\(\%#\)\(\s*\)\(.*\)/\1\2\r\1\4\6
-	call histdel("/", -1)
+    s/^\(\s*\)\(.\{-}\)\(\s*\)\(\%#\)\(\s*\)\(.*\)/\1\2\r\1\4\6
+    call histdel("/", -1)
 endfunction
 
 nnoremap <leader><CR> :<C-u>call BreakHere()<CR>
 
-" FZF
-let g:fzf_preview_window = ['right:50%', 'ctrl-/']
-nnoremap <leader>f :Files<CR>
-nnoremap <silent> <C-f> :Rg<CR>
+" Templates
+augroup templates
+    autocmd BufNewFile *.sh 0r $VIMHOME/templates/skeleton.sh
+augroup END
 
+" Fuzzyfinder
+"let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+"nnoremap <leader>f :Telescope find_files<CR>
+nnoremap <silent> <C-f> :Telescope live_grep<CR>
 
-" When shortcut files are updated, renew bash and ranger configs with new material:
-autocmd BufWritePost bm-files,bm-dirs !shortcuts
-" Run xrdb whenever Xdefaults or Xresources are updated.
-autocmd BufRead,BufNewFile Xresources,Xdefaults,xresources,xdefaults set filetype=xdefaults
-autocmd BufWritePost Xresources,Xdefaults,xresources,xdefaults !xrdb %
-autocmd BufWritePost .zshrc !source %
+" Source con figs after editing them
+augroup configsource
+    autocmd BufWritePost bm-files,bm-dirs !shortcuts
+    autocmd BufRead,BufNewFile Xresources,Xdefaults,xresources,xdefaults set filetype=xdefaults
+    autocmd BufWritePost Xresources,Xdefaults,xresources,xdefaults !xrdb %
+    autocmd BufWritePost .zshrc !source %
+    autocmd! BufWritePost init.vim source %
+augroup END
 
 " LaTeX Settings
 autocmd Filetype tex setl updatetime=1000
-let g:livepreview_previewer = 'zathura'
-nnoremap <leader>v :VimtexCompile<CR>
-autocmd VimLeave *.tex !texclear.sh %
+autocmd Filetype tex nnoremap <leader>v :VimtexCompile<CR>
+autocmd BufLeave *.tex :!texclear.sh %
 autocmd FileType tex nnoremap <buffer> <C-T> :VimtexTocToggle<CR><C-L>
 autocmd FileType tex inoremap <buffer> <C-T> <esc>:VimtexTocToggle<CR><C-L>i
 let g:vimtex_toc_config = {
@@ -264,23 +266,18 @@ let g:vimtex_toc_config = {
       \ 'show_numbers' : 1,
       \ 'mode' : 2,
       \}
-let g:indentLine_fileTypeExclude = ['tex']
-" Quicktex snippets
-source ~/.config/nvim/tex.vim
 
-" Training Wheels
-inoremap <Left> <nop>
-inoremap <Right> <nop>
-inoremap <Up> <nop>
-inoremap <Down> <nop>
-nnoremap <Left> <nop>
-nnoremap <Right> <nop>
-nnoremap <Up> <nop>
-nnoremap <Down> <nop>
+" Markdown preview
+let g:pandoc#command#autoexec_on_writes = 0
+augroup markdownpreview
+    autocmd BufWritePost *.rmd silent !pandoc -o "%:r_preview.pdf" "%:p" --pdf-engine pdflatex --quiet --metadata-file=/home/ayush/.config/nvim/pandoc_latex.yaml
+    autocmd Filetype rmd nnoremap <silent> <leader>v :!opout.sh "%:r_preview.rmd"<CR>
+    autocmd BufLeave *.rmd :!rm "%:r_preview.pdf""
+augroup END
+let g:pandoc#modules#disabled = ["folding"]
 
 " Syntax conceal
 nnoremap <leader><leader>c :call ToggleConceal()<CR>
-let g:indentLine_conceallevel = 0
 function! ToggleConceal()
     if &conceallevel == 0
         set conceallevel=2
@@ -289,6 +286,10 @@ function! ToggleConceal()
     endif
 endfunction
 
-" Rust
-let g:ale_linters.rust = ['cargo', 'rls']
-let g:ale_rust_rls_toolchain = 'stable'
+" Mutt
+autocmd BufRead,BufNewFile mutt-* :Goyo
+
+" Quick spelling correction
+"set spellfile=$VIMHOME/spell/en.utf-8.add
+"setlocal spell spelllang=en
+"inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u

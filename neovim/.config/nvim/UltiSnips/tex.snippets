@@ -1,0 +1,462 @@
+priority 1
+
+global !p
+def math():
+	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+def comment(): 
+	return vim.eval('vimtex#syntax#in_comment()') == '1'
+def env(name):
+	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
+	return x != '0' and y != '0'
+endglobal
+
+
+snippet template "Basic template" b
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[english]{babel}
+\usepackage{amsmath, amssymb, physics}
+\DeclareMathOperator{\Forall}{\forall}
+\DeclareMathOperator{\Exist}{\exist}
+\DeclareMathOperator{\Nexist}{\nexist}
+
+\begin{document}
+	$0
+\end{document}
+endsnippet
+
+snippet mk "Inline Math" w
+$${1}$ $0
+endsnippet
+
+snippet dm "Display Math" w
+$$
+	${1:${VISUAL}}
+$$
+
+$0
+endsnippet
+
+
+snippet beg "begin{} / end{}" bA
+\\begin{$1}
+	$0
+\\end{$1}
+endsnippet
+
+priority 100
+snippet ... "ldots" iA
+\ldots
+endsnippet
+
+context "math()"
+snippet text "Text command" Ai
+\text{$1} $0
+endsnippet
+
+context "math()"
+snippet alpha "alpha" Aw
+\alpha
+endsnippet
+    
+context "math()"
+snippet beta "beta" Aw
+\beta
+endsnippet
+    
+context "math()"
+snippet gamma "gamma" Aw
+\gamma
+endsnippet
+    
+context "math()"
+snippet Gamma "Gamma" Aw
+\Gamma
+endsnippet
+    
+context "math()"
+snippet delta "delta" Aw
+\delta
+endsnippet
+    
+context "math()"
+snippet Delta "Delta" Aw
+\Delta
+endsnippet
+    
+context "math()"
+snippet epsilon "epsilon" Aw
+\varepsilon
+endsnippet
+    
+context "math()"
+snippet zeta "zeta" Aw
+\zeta
+endsnippet
+    
+context "math()"
+snippet eta "eta" Aw
+\eta
+endsnippet
+    
+context "math()"
+snippet theta "theta" Aw
+\theta
+endsnippet
+    
+context "math()"
+snippet Theta "Theta" Aw
+\Theta
+endsnippet
+    
+context "math()"
+snippet iota "iota" Aw
+\iota
+endsnippet
+    
+context "math()"
+snippet kappa "kappa" Aw
+\kappa
+endsnippet
+    
+context "math()"
+snippet lambda "lambda" Aw
+\lambda
+endsnippet
+    
+context "math()"
+snippet Lambda "Lambda" Aw
+\Lambda
+endsnippet
+    
+context "math()"
+snippet mu "mu" Aw
+\mu
+endsnippet
+    
+context "math()"
+snippet nu "nu" Aw
+\nu
+endsnippet
+    
+context "math()"
+snippet xi "xi" Aw
+\xi
+endsnippet
+    
+context "math()"
+snippet Xi "Xi" Aw
+\Xi
+endsnippet
+    
+context "math()"
+snippet omega "omega" Aw
+\omega
+endsnippet
+    
+context "math()"
+snippet Omega "Omega" Aw
+\Omega
+endsnippet
+    
+context "math()"
+snippet pi "pi" Aw
+\pi
+endsnippet
+    
+context "math()"
+snippet Pi "Pi" Aw
+\Pi
+endsnippet
+    
+context "math()"
+snippet rho "rho" Aw
+\rho
+endsnippet
+    
+context "math()"
+snippet Rho "Rho" Aw
+\Rho
+endsnippet
+    
+context "math()"
+snippet sigma "sigma" Aw
+\sigma
+endsnippet
+    
+context "math()"
+snippet Sigma "Sigma" Aw
+\Sigma
+endsnippet
+    
+context "math()"
+snippet tau "tau" Aw
+\tau
+endsnippet
+    
+context "math()"
+snippet upsilon "upsilon" Aw
+\upsilon
+endsnippet
+    
+context "math()"
+snippet Upsilon "Upsilon" Aw
+\Upsilon
+endsnippet
+    
+context "math()"
+snippet phi "phi" Aw
+\varphi
+endsnippet
+    
+context "math()"
+snippet Phi "Phi" Aw
+\Phi
+endsnippet
+    
+context "math()"
+snippet chi "chi" Aw
+\chi
+endsnippet
+    
+context "math()"
+snippet Chi "Chi" Aw
+\Chi
+endsnippet
+    
+context "math()"
+snippet psi "psi" Aw
+\psi
+endsnippet
+    
+context "math()"
+snippet Psi "Psi" Aw
+\Psi
+endsnippet
+
+# SHORTCUT 
+
+context "math()"
+snippet sr "square" Ai
+^2 
+endsnippet
+
+context "math()"
+snippet cb "cube" Ai
+^3
+endsnippet
+
+context "math()"
+snippet rtn "raised to n" Ai
+^n
+endsnippet
+
+context "math()"
+snippet inv "Inverse/reciprocal" Ai
+^{-1} 
+endsnippet
+
+context "math()"
+snippet pow "exponent" Ai
+^{$1} 
+endsnippet
+
+context "math()"
+snippet cross "exponent" Aw
+\times
+endsnippet
+
+context "math()"
+snippet sub "Subscript" Ai
+_{$1} 
+endsnippet
+
+
+#Vector Calc
+
+## Symbols
+
+context "math()"
+snippet nabla "nabla" Aw
+\nabla
+endsnippet
+
+## Integrals
+
+context "math()"
+snippet lint "Line integral"
+\int_{\mathcal C}{\vec{$1} \cdot d\vec{$2}} 
+endsnippet
+
+context "math()"
+snippet olint "Closed line integral"
+\oint_{\mathcal C}{\vec{$1} \cdot d\vec{$2}} 
+endsnippet
+
+context "math()"
+snippet sint "Surface integral with unit vector"
+\int_{\mathcal S}{\vec{$1} \cdot d{$2}\hat{n}} 
+endsnippet
+
+context "math()"
+snippet sinta "Surface integral with dA vector"
+\int_{\mathcal S}{\vec{$1} \cdot d\vec{A}} 
+endsnippet
+
+context "math()"
+snippet osint "Closed surface integral with unit vector"
+\oint_{\mathcal S}{\vec{$1} \cdot d{$2}\hat{n}} 
+endsnippet
+
+context "math()"
+snippet osinta "Closed urface integral with dA vector"
+\oint_{\mathcal S}{\vec{$1} \cdot d\vec{A}} 
+endsnippet
+
+context "math()"
+snippet vint "Volume integral"
+\int_{\mathcal V}{{$1} d$2  d$3  d$4} 
+endsnippet
+
+# SHORT INTEGRAL
+
+context "math()"
+snippet int "Single integral"
+\int{$1} {d$2} 
+endsnippet
+
+context "math()"
+snippet iint "Double integral"		
+\iint{{$1} d$2 d$3} 
+endsnippet
+
+context "math()"
+snippet iiint "Triple integral"		
+\vint{{$1} d$2 d$3 d$4} 
+endsnippet
+# ADD MULTI CORD AND FIX SPACE ISSUES SPECIFIC LIKE VINT
+
+context "math()"
+snippet oint "Closed integral"
+\oint{$1} {d$2} 
+endsnippet
+
+context "math()"
+snippet div "Divergence" iA
+\div{$1} 
+endsnippet
+
+context "math()"
+snippet grad "Gradient" iA
+\grad{$1} 
+endsnippet
+
+context "math()"
+snippet curl "Curl" iA
+\curl{$1} 
+endsnippet
+
+context "math()"
+snippet lapl "Laplacian" iA
+\laplacian{$1} 
+endsnippet
+
+context "math()"
+snippet frac "Fraction" iA
+\frac{$1}{$2} 
+endsnippet
+
+# QUANTIFIERS
+
+context "math()"
+snippet exists "Existential quantifier" Aw
+\Exists
+endsnippet
+
+context "math()"
+snippet forall "Universal quantifier" Aw
+\Forall
+endsnippet
+
+context "math()"
+snippet dne "DNE quantifier" Aw
+\Nexist
+endsnippet
+
+# STATEMENTS
+
+context "math()"
+snippet implies "Implication" Aw
+\implies
+endsnippet
+
+context "math()"
+snippet iff "Bijection" Aw
+\iff
+endsnippet
+
+context "math()"
+snippet st "Such that (colon)" Aw
+\ :\ 
+endsnippet
+
+context "math()"
+snippet sucht "Such that (text)" Aw
+\ \text{s.t.}\ 
+endsnippet
+
+# FUNCTIONS
+
+#floor
+#ciel
+#abs
+
+context "math()"
+snippet abs "Absolute value" Aw
+\abs{$1} 
+endsnippet
+
+# SETS
+
+context "math()"
+snippet in "Belongs to set" Aw
+\in
+endsnippet
+
+context "math()"
+snippet nin "Does not belong to set" Aw
+\notin
+endsnippet
+
+# CONSTANTS
+
+context "math()"
+snippet hbar "Reduced planck's constant" Aw
+\hbar
+endsnippet
+
+context "math()"
+snippet ift "Infinity" Aw
+\infty
+endsnippet
+
+context "math()"
+snippet aleph "Aleph"
+\aleph
+endsnippet
+
+# LIMITS
+# FUNCTIONS
+# DERIVATIVES
+# RELATIONS
+# \'bn' : '\(\mathbb{N}\) ',
+# \'bz' : '\(\mathbb{Z}\) ',
+# \'bq' : '\(\mathbb{Q}\) ',
+# \'br' : '\(\mathbb{R}\) ',
+# \'bc' : '\(\mathbb{C}\) ',
+# \'ba' : '\(\mathbb{A}\) ',
+# \'bf' : '\(\mathbb{F}\) ',
+# UNIT VECTORS

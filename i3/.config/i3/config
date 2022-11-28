@@ -1,3 +1,5 @@
+# vim:filetype=i3
+#
 # Gibraltar (i3)
 # 2021 Ayush Shenoy (@masala-man)
 # masala-man/rice-gibraltar
@@ -37,8 +39,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+Return exec $terminal
 #
 ## Application Launcher
-#bindsym $mod+d exec dmenu_recency -b -nb "$term_color0" -nf "$term_color15" -sb "$term_color1" -sf "$term_color15"
-bindsym $mod+d exec rofi -font "Roboto Mono Medium 10" -show run
+bindsym $mod+d exec --no-startup-id rofi -font "Roboto Mono Medium 10" -show run -run-shell-command 'zsh -ic "{cmd} && read"'
 #
 ## Window Switcher
 bindsym $mod+x exec rofi -font "Roboto Mono Medium 10" -show window
@@ -55,7 +56,7 @@ bindsym Ctrl+space exec dunstctl close
 bindsym Ctrl+Shift+space exec dunstctl close-all
 #
 ## Notifications Pause
-# TODO
+#TODO
 #
 ## Reload Config
 bindsym $mod+Shift+c reload
@@ -156,10 +157,10 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 ## Application-specific Bindings
 #
 ### Open applications on specific workspaces
-assign [class="discord"] $ws4
-assign [class="code"] $ws1
+#assign [class="discord"] $ws4
+assign [class="Code"] $ws4
 ### Open specific applications in floating mode
-#for_window [title="alsamixer"] floating enable border pixel 1
+for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="calamares"] floating enable border normal
 for_window [class="Clipgrab"] floating enable
 for_window [title="File Transfer*"] floating enable
@@ -188,7 +189,9 @@ for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 for_window [class="sxiv"] floating enable
 for_window [title="Picture-in-Picture"] floating enable sticky enable border pixel 1
-#
+for_window [class="Dwarf_Fortress"] floating enable border normal
+for_window [class="Code"] border pixel 1
+for_window [class="Piper"] floating enable
 #
 # THEMING
 #
@@ -277,10 +280,10 @@ focus_follows_mouse no
 #bindsym $mod+Right focus right
 #
 ## Move Window
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+#bindsym $mod+Shift+Left move left
+#bindsym $mod+Shift+Down move down
+#bindsym $mod+Shift+Up move up
+#bindsym $mod+Shift+Right move right
 #
 ## Vimbinds
 ### Move Focus
@@ -296,7 +299,6 @@ bindsym $mod+Shift+l move right
 #
 ## workspace back and forth (with/without active container)
 workspace_auto_back_and_forth yes
-#bindsym $mod+b workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 #
 ## split orientation
@@ -352,11 +354,8 @@ mode "resize" {
 # AUTOSTART
 #
 ## System
-exec_always --no-startup-id bash ~/bin/i3start.sh
 exec_always --no-startup-id source ~/.profile; bash ~/.config/polybar/launch.sh
-#
-## Audio 
-bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
+exec_always --no-startup-id bash ~/bin/i3start.sh
 #
 ## Applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
