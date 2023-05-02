@@ -1,9 +1,9 @@
 # vim:filetype=i3
 #
 # Gibraltar (i3)
-# 2021 Ayush Shenoy (@masala-man)
-# masala-man/rice-gibraltar
-# tested on Manjaro 21.0.7 Ornara
+# Ayush Shenoy (@ashenoy463)
+# ashenoy463/dotfiles-gibraltar
+# tested on Manjaro
 #---------------------------------
 #
 # INITIALIZATION
@@ -17,9 +17,9 @@ set $terminal st
 ## Border
 default_border pixel 1
 default_floating_border normal
-#
-## Hide borders
 hide_edge_borders none
+## Title
+title_align center
 #
 ## Font
 font pango:robotno medium 9
@@ -58,6 +58,9 @@ bindsym Ctrl+Shift+space exec dunstctl close-all
 ## Notifications Pause
 #TODO
 #
+## Clipboard
+bindsym $mod+Ctrl+v exec ~/bin/showclip.sh
+#
 ## Reload Config
 bindsym $mod+Shift+c reload
 #
@@ -92,8 +95,8 @@ for_window[instance="drop_*"] sticky enable
 for_window[instance="drop_monitor"] resize set 1500 800
 for_window[instance="drop_monitor"] move absolute position center
 for_window[instance="drop_monitor"] move scratchpad
-for_window[instance="drop_calc"] resize set 500 300
-for_window[instance="drop_calc"] move absolute position 550 -20
+for_window[instance="drop_calc"] resize set 500 200
+for_window[instance="drop_calc"] move absolute position 550 -10
 for_window[instance="drop_calc"] move scratchpad
 for_window[instance="drop_music"] move absolute position center
 #
@@ -159,6 +162,7 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 ### Open applications on specific workspaces
 #assign [class="discord"] $ws4
 assign [class="Code"] $ws4
+assign [class="firefox"] $ws3
 ### Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="calamares"] floating enable border normal
@@ -192,6 +196,25 @@ for_window [title="Picture-in-Picture"] floating enable sticky enable border pix
 for_window [class="Dwarf_Fortress"] floating enable border normal
 for_window [class="Code"] border pixel 1
 for_window [class="Piper"] floating enable
+# https://github.com/ValveSoftware/steam-for-linux/issues/1040
+for_window [class="^Steam$" title="^Friends$"] floating enable
+for_window [class="^Steam$" title="Steam - News"] floating enable
+for_window [class="^Steam$" title=".* - Chat"] floating enable
+for_window [class="^Steam$" title="^Settings$"] floating enable
+for_window [class="^Steam$" title=".* - event started"] floating enable
+for_window [class="^Steam$" title=".* CD key"] floating enable
+for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
+for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
+for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
+for_window [title="^Steam Keyboard$"] floating enable
+# Dynamics Software
+for_window [class="DFIELD"] floating enable
+for_window [class="PPLANE"] floating enable
+for_window [class="XPPAUT"] floating enable
+for_window [class="^$" title="^\*.ode"] floating enable
+#for_window [title="^Data Viewer$"] floating enable
+for_window [class="^$" title="^Equations$"] floating enable
+for_window [class="^$" title="^Boundary Conds$"] floating enable
 #
 # THEMING
 #
@@ -218,7 +241,7 @@ set_from_resource $term_color15    color15
 ## class                border               background           text              indicator              child_border
 client.focused          $term_background     $term_background     $term_foreground  $term_background       $term_background
 client.focused_inactive $term_background     $term_background     $term_foreground  $term_background       $term_background
-client.unfocused        $term_background     $term_background     $term_foreground  $term_background       $term_background
+client.unfocused        #142026              #142026              $term_foreground  $term_background       $term_background
 client.urgent           $term_background     $term_background     $term_foreground  $term_background       $term_background
 client.placeholder      $term_background     $term_background     $term_foreground  $term_background       $term_background
 client.background       $term_background
@@ -231,9 +254,9 @@ gaps inner 10
 gaps outer 0
 #
 ## Gap Menu
-set $mode_gaps Gaps: (o) outer, (i) inner
-set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps gaps: (o)uter, (i)nner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local) , Shift +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local) , Shift +|-|0 (global)
 bindsym $mod+Shift+g mode "$mode_gaps"
 
 mode "$mode_gaps" {
@@ -274,28 +297,15 @@ mode "$mode_gaps_outer" {
 focus_follows_mouse no
 #
 ## Move Focus
-#bindsym $mod+Left focus left
-#bindsym $mod+Down focus down
-#bindsym $mod+Up focus up
-#bindsym $mod+Right focus right
-#
-## Move Window
-#bindsym $mod+Shift+Left move left
-#bindsym $mod+Shift+Down move down
-#bindsym $mod+Shift+Up move up
-#bindsym $mod+Shift+Right move right
-#
-## Vimbinds
-### Move Focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-### Move Window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+## Move Window
+bindsym $mod+Shift+h move left 25
+bindsym $mod+Shift+j move down 25
+bindsym $mod+Shift+k move up 25
+bindsym $mod+Shift+l move right 25
 #
 ## workspace back and forth (with/without active container)
 workspace_auto_back_and_forth yes
@@ -329,23 +339,11 @@ bindsym $mod+a focus parent
 ## Resize window (you can also use the mouse for that)
 bindsym $mod+r mode "resize"
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 5 px or 5 ppt
-        bindsym k resize grow height 5 px or 5 ppt
-        bindsym l resize shrink height 5 px or 5 ppt
-        bindsym semicolon resize grow width 5 px or 5 ppt
+        bindsym h resize shrink width 5 px or 5 ppt
+        bindsym j resize grow height 5 px or 5 ppt
+        bindsym k resize shrink height 5 px or 5 ppt
+        bindsym l resize grow width 5 px or 5 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        # exit resize mode: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }

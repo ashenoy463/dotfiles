@@ -1,11 +1,19 @@
 https://archlinux.org/feeds/news/ "Arch Linux"
-https://archlinux.org/feeds/packages/ "Arch Linux"
 https://archlinux.org/feeds/planet/ "Arch Linux"
 
 https://addy-dclxvi.github.io/index.xml "Blogs"
 https://deadbeef.me/feed.xml "Blogs"
-https://daringfireball.net/feeds/main "Blogs"
+#https://daringfireball.net/feeds/main "Blogs"
 https://lukesmith.xyz/rss.xml "Blogs"
 
+https://www.bay12games.com/dwarves/dev_now.rss "Games" "~[Gamedev Log] Dwarf Fortress"
+https://store.steampowered.com/feeds/news/app/1836400/?cc=IN&l=english&snr=1_2108_9__2107 "Games" "~[Game Updates] Mossfield Origins"
+https://store.steampowered.com/feeds/news/app/1490930/?cc=IN&l=english&snr=1_2108_9__2107 "Games" "~[Game Updates] Capital Command"
+https://store.steampowered.com/feeds/news/app/1390190/?cc=IN&l=english&snr=1_2108_9__2107 "Games" "~[Game Updates] Apico"
+https://store.steampowered.com/feeds/news/app/957960/?cc=IN&l=english&snr=1_2108_9__2107 "Games" "~[Game Updates] Inkulinati"
+https://store.steampowered.com/feeds/news/app/1280190/?cc=IN&l=english&snr=1_2108_9__2107 "Games" "~[Game Updates] Falling Frontier"
+https://store.steampowered.com/feeds/news/app/625960/?cc=IN&l=english&snr=1_2108_9__2107 "Games" "~[Game Updates] Stoneshard"
 
-https://www.bay12games.com/dwarves/dev_now.rss
+https://github.com/Ermentrout/xppaut/commits.atom "AUR Upstream" "~[AUR] xppaut-bin"
+https://github.com/glotzerlab/hoomd-blue/releases.atom "AUR Upstream" "~[AUR] hoomd-blue"
+https://github.com/bassdr/alsaequal/releases.atom "AUR Upstream" "~[AUR] alsaequal"

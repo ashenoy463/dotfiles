@@ -1,7 +1,7 @@
 " Gibraltar (neovim)
-" 2021 Ayush Shenoy (@masala-man)
-" masala-man/rice-gibraltar
-" tested on Manjaro 21.0.7 Ornara
+" Ayush Shenoy (@ashenoy463)
+" ashenoy463/dotfiles-gibraltar
+" tested on Manjaro
 "---------------------------------
 "
 " Make sure plugin manager is installed
@@ -46,7 +46,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'xuyuanp/nerdtree-git-plugin'
 " UI Features
 Plug 'BurntSushi/ripgrep'
-Plug 'nvim-telescope/telescope.nvim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'francoiscabrol/ranger.vim'
@@ -57,13 +58,14 @@ Plug 'mhinz/vim-startify'
 Plug 'mbbill/undotree'
 Plug 'lilydjwg/colorizer'
 " Others
-Plug 'nvim-lua/plenary.nvim' "Required for telescope
 Plug 'rbgrouleff/bclose.vim' " Required for ranger
 Plug 'dylanaraps/wal.vim'
 Plug 'masala-man/vimala'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 call plug#end()
+"Plug 'nvim-lua/plenary.nvim' "Required for telescope
+"Plug 'nvim-telescope/telescope.nvim'
 
 " UI
 colorscheme wal
@@ -133,7 +135,7 @@ let g:airline#extensions#ale#warning_symbol = '..'
 highlight ALEErrorSignLineNr ctermfg=red ctermbg=black
 let g:airline#extensions#ale#enabled = 1
 let g:ale_linters = {'python': ['flake8'], 'rust': ['cargo']}
-let g:ale_fixers = {'python': ['autoflake'],'rust': ['rustfmt'], '*': ['remove_trailing_lines', 'trim_whitespace']}
+let g:ale_fixers = {'python': ['autopep8'],'rust': ['rustfmt'], '*': ['remove_trailing_lines', 'trim_whitespace']}
 let g:ale_fix_on_save = 0
 autocmd VimEnter *.py ALEDisable
 autocmd VimEnter *.tex ALEDisable
@@ -187,13 +189,13 @@ let g:NERDTreeHighlightFoldersFullName = 1
 
 " Startify
 let g:startify_custom_header = [
-\ '                  __                 ',
-\ '   ___    __  __ /\_\     _______    ',
-\ '  /`_ `\ /\ \/\ \\/\ \   /` _  __`\  ',
-\ ' /\ \/\ \\ \ \_/ |\ \ \ /\ \/\ \/\ \ ',
-\ ' \ \_\ \_\\ \___/  \ \_\\ \_\ \_\ \_\',
-\ '  \/_/\/_/ \/__/    \/_/ \/_/\/_/\/_/',
-\ ' ++++++++++++++++++++++++++++++++++++']
+            \ '                  __                 ',
+            \ '   ___    __  __ /\_\     _______    ',
+            \ '  /`_ `\ /\ \/\ \\/\ \   /` _  __`\  ',
+            \ ' /\ \/\ \\ \ \_/ |\ \ \ /\ \/\ \/\ \ ',
+            \ ' \ \_\ \_\\ \___/  \ \_\\ \_\ \_\ \_\',
+            \ '  \/_/\/_/ \/__/    \/_/ \/_/\/_/\/_/',
+            \ ' ++++++++++++++++++++++++++++++++++++']
 
 " Plugin Menu Navigation
 nnoremap <C-T> :TagbarToggle<CR><C-L>
@@ -237,9 +239,11 @@ augroup templates
 augroup END
 
 " Fuzzyfinder
-"let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 "nnoremap <leader>f :Telescope find_files<CR>
-nnoremap <silent> <C-f> :Telescope live_grep<CR>
+"nnoremap <silent> <C-f> :Telescope live_grep<CR>
+let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+nnoremap <leader>f :Files<CR>
+nnoremap <silent> <C-f> :Rg<CR>
 
 " Source con figs after editing them
 augroup configsource
@@ -247,25 +251,25 @@ augroup configsource
     autocmd BufRead,BufNewFile Xresources,Xdefaults,xresources,xdefaults set filetype=xdefaults
     autocmd BufWritePost Xresources,Xdefaults,xresources,xdefaults !xrdb %
     autocmd BufWritePost .zshrc !source %
-    autocmd! BufWritePost init.vim source %
+    "autocmd BufWritePost init.vim source %
 augroup END
 
 " LaTeX Settings
 autocmd Filetype tex setl updatetime=1000
 autocmd Filetype tex nnoremap <leader>v :VimtexCompile<CR>
-autocmd BufLeave *.tex :!texclear.sh %
+autocmd BufWritePost *.tex silent :!texclear.sh "%:p"
 autocmd FileType tex nnoremap <buffer> <C-T> :VimtexTocToggle<CR><C-L>
 autocmd FileType tex inoremap <buffer> <C-T> <esc>:VimtexTocToggle<CR><C-L>i
 let g:vimtex_toc_config = {
-      \ 'name' : 'TOC',
-      \ 'layers' : ['content', 'todo', 'include'],
-      \ 'resize' : 1,
-      \ 'split_width' : 50,
-      \ 'todo_sorted' : 0,
-      \ 'show_help' : 1,
-      \ 'show_numbers' : 1,
-      \ 'mode' : 2,
-      \}
+            \ 'name' : 'TOC',
+            \ 'layers' : ['content', 'todo', 'include'],
+            \ 'resize' : 1,
+            \ 'split_width' : 50,
+            \ 'todo_sorted' : 0,
+            \ 'show_help' : 1,
+            \ 'show_numbers' : 1,
+            \ 'mode' : 2,
+            \}
 
 " Markdown preview
 let g:pandoc#command#autoexec_on_writes = 0
@@ -286,8 +290,8 @@ function! ToggleConceal()
     endif
 endfunction
 
-" Mutt
-autocmd BufRead,BufNewFile mutt-* :Goyo
+ "Mutt
+autocmd BufReadPost mutt-* :Goyo
 
 " Quick spelling correction
 "set spellfile=$VIMHOME/spell/en.utf-8.add

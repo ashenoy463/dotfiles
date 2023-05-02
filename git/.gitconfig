@@ -1,5 +1,6 @@
 [user]
-	email = masala_man@protonmail.com
-    name = Masala Man
+	email = ayush.shenoy92@gmail.com
+    name = Ayush Shenoy
+	signingkey = ayush.shenoy92@gmail.com
 [init]
 	defaultBranch = main

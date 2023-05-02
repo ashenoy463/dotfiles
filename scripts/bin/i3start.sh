@@ -3,7 +3,8 @@
 . ~/.profile
 
 # Start compositor
-pkill picom ; picom -b
+pkill picom
+picom -b
 
 # Get colors from override theme and set wallpaper OR get colors from wallpaper
 wal --theme $RICE_THEME && feh --bg-scale $RICE_WALLPAPER || wal -i $RICE_WALLPAPER

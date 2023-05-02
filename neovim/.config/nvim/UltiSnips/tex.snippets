@@ -59,7 +59,7 @@ endsnippet
 
 context "math()"
 snippet alpha "alpha" Aw
-\alpha
+\alpha 
 endsnippet
     
 context "math()"
@@ -69,117 +69,117 @@ endsnippet
     
 context "math()"
 snippet gamma "gamma" Aw
-\gamma
+\gamma 
 endsnippet
     
 context "math()"
 snippet Gamma "Gamma" Aw
-\Gamma
+\Gamma 
 endsnippet
     
 context "math()"
 snippet delta "delta" Aw
-\delta
+\delta 
 endsnippet
     
 context "math()"
 snippet Delta "Delta" Aw
-\Delta
+\Delta 
 endsnippet
     
 context "math()"
 snippet epsilon "epsilon" Aw
-\varepsilon
+\varepsilon 
 endsnippet
     
 context "math()"
 snippet zeta "zeta" Aw
-\zeta
+\zeta 
 endsnippet
     
 context "math()"
 snippet eta "eta" Aw
-\eta
+\eta 
 endsnippet
     
 context "math()"
 snippet theta "theta" Aw
-\theta
+\theta 
 endsnippet
     
 context "math()"
 snippet Theta "Theta" Aw
-\Theta
+\Theta 
 endsnippet
     
 context "math()"
 snippet iota "iota" Aw
-\iota
+\iota 
 endsnippet
     
 context "math()"
 snippet kappa "kappa" Aw
-\kappa
+\kappa 
 endsnippet
     
 context "math()"
 snippet lambda "lambda" Aw
-\lambda
+\lambda 
 endsnippet
     
 context "math()"
 snippet Lambda "Lambda" Aw
-\Lambda
+\Lambda 
 endsnippet
     
 context "math()"
 snippet mu "mu" Aw
-\mu
+\mu 
 endsnippet
     
 context "math()"
 snippet nu "nu" Aw
-\nu
+\nu 
 endsnippet
     
 context "math()"
 snippet xi "xi" Aw
-\xi
+\xi 
 endsnippet
     
 context "math()"
 snippet Xi "Xi" Aw
-\Xi
+\Xi 
 endsnippet
     
 context "math()"
 snippet omega "omega" Aw
-\omega
+\omega 
 endsnippet
     
 context "math()"
 snippet Omega "Omega" Aw
-\Omega
+\Omega 
 endsnippet
     
 context "math()"
 snippet pi "pi" Aw
-\pi
+\pi 
 endsnippet
     
 context "math()"
 snippet Pi "Pi" Aw
-\Pi
+\Pi 
 endsnippet
     
 context "math()"
 snippet rho "rho" Aw
-\rho
+\rho 
 endsnippet
     
 context "math()"
 snippet Rho "Rho" Aw
-\Rho
+\Rho 
 endsnippet
     
 context "math()"
@@ -240,17 +240,17 @@ endsnippet
 # SHORTCUT 
 
 context "math()"
-snippet sr "square" Ai
+snippet sr "Square" Ai
 ^2 
 endsnippet
 
 context "math()"
-snippet cb "cube" Ai
+snippet cb "Cube" Ai
 ^3
 endsnippet
 
 context "math()"
-snippet rtn "raised to n" Ai
+snippet rtn "Raised to n" Ai
 ^n
 endsnippet
 
@@ -260,20 +260,31 @@ snippet inv "Inverse/reciprocal" Ai
 endsnippet
 
 context "math()"
-snippet pow "exponent" Ai
-^{$1} 
+snippet pow "Exponent" Ai
+^{$1}
 endsnippet
 
 context "math()"
-snippet cross "exponent" Aw
+snippet cross "Cross" Aw
 \times
 endsnippet
 
 context "math()"
 snippet sub "Subscript" Ai
-_{$1} 
+_{$1}
 endsnippet
 
+# Linear Algebra
+
+context "math()"
+snippet bvec "Boldface Vector" Aw
+\boldsymbol{$1}
+endsnippet
+
+context "math()"
+snippet norm "Norm" Aw
+\norm{$1} $0
+endsnippet
 
 #Vector Calc
 
@@ -288,54 +299,54 @@ endsnippet
 
 context "math()"
 snippet lint "Line integral"
-\int_{\mathcal C}{\vec{$1} \cdot d\vec{$2}} 
+\int_{\mathcal C}{\vec{$1} \cdot d\vec{$2}}
 endsnippet
 
 context "math()"
 snippet olint "Closed line integral"
-\oint_{\mathcal C}{\vec{$1} \cdot d\vec{$2}} 
+\oint_{\mathcal C}{\vec{$1} \cdot d\vec{$2}}
 endsnippet
 
 context "math()"
 snippet sint "Surface integral with unit vector"
-\int_{\mathcal S}{\vec{$1} \cdot d{$2}\hat{n}} 
+\int_{\mathcal S}{\vec{$1} \cdot d{$2}\hat{n}}
 endsnippet
 
 context "math()"
 snippet sinta "Surface integral with dA vector"
-\int_{\mathcal S}{\vec{$1} \cdot d\vec{A}} 
+\int_{\mathcal S}{\vec{$1} \cdot d\vec{A}}
 endsnippet
 
 context "math()"
 snippet osint "Closed surface integral with unit vector"
-\oint_{\mathcal S}{\vec{$1} \cdot d{$2}\hat{n}} 
+\oint_{\mathcal S}{\vec{$1} \cdot d{$2}\hat{n}}
 endsnippet
 
 context "math()"
-snippet osinta "Closed urface integral with dA vector"
-\oint_{\mathcal S}{\vec{$1} \cdot d\vec{A}} 
+snippet osinta "Closed surface integral with dA vector"
+\oint_{\mathcal S}{\vec{$1} \cdot d\vec{A}}
 endsnippet
 
 context "math()"
 snippet vint "Volume integral"
-\int_{\mathcal V}{{$1} d$2  d$3  d$4} 
+\int_{\mathcal V}{{$1} d$2  d$3  d$4}
 endsnippet
 
-# SHORT INTEGRAL
+# Vanilla integrals
 
 context "math()"
 snippet int "Single integral"
-\int{$1} {d$2} 
+\int{$1} {d$2}
 endsnippet
 
 context "math()"
 snippet iint "Double integral"		
-\iint{{$1} d$2 d$3} 
+\iint{{$1} d$2 d$3}
 endsnippet
 
 context "math()"
 snippet iiint "Triple integral"		
-\vint{{$1} d$2 d$3 d$4} 
+\vint{{$1} d$2 d$3 d$4}
 endsnippet
 # ADD MULTI CORD AND FIX SPACE ISSUES SPECIFIC LIKE VINT
 
@@ -369,7 +380,11 @@ snippet frac "Fraction" iA
 \frac{$1}{$2} 
 endsnippet
 
-# QUANTIFIERS
+# Quantifiers (custom definition reliant)
+
+#\DeclareMathOperator{\Forall}{\forall}
+#\DeclareMathOperator{\Exists}{\exists}
+#\DeclareMathOperator{\Nexist}{\nexist}
 
 context "math()"
 snippet exists "Existential quantifier" Aw
@@ -386,7 +401,7 @@ snippet dne "DNE quantifier" Aw
 \Nexist
 endsnippet
 
-# STATEMENTS
+# Statements
 
 context "math()"
 snippet implies "Implication" Aw
@@ -400,7 +415,7 @@ endsnippet
 
 context "math()"
 snippet st "Such that (colon)" Aw
-\ :\ 
+\colon
 endsnippet
 
 context "math()"
@@ -408,7 +423,7 @@ snippet sucht "Such that (text)" Aw
 \ \text{s.t.}\ 
 endsnippet
 
-# FUNCTIONS
+# Functions
 
 #floor
 #ciel
@@ -419,7 +434,17 @@ snippet abs "Absolute value" Aw
 \abs{$1} 
 endsnippet
 
-# SETS
+context "math()"
+snippet of "Function" Aw
+($1) $0
+endsnippet
+
+context "math()"
+snippet mapsto "Mapping" Aw
+\mapsto 
+endsnippet
+
+# Set theory
 
 context "math()"
 snippet in "Belongs to set" Aw
@@ -431,7 +456,7 @@ snippet nin "Does not belong to set" Aw
 \notin
 endsnippet
 
-# CONSTANTS
+# Constants
 
 context "math()"
 snippet hbar "Reduced planck's constant" Aw

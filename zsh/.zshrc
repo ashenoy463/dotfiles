@@ -1,6 +1,5 @@
 export PATH=$HOME/bin:$HOME/.local/bin/:$HOME/go:$HOME/.local/share/gem/ruby/3.0.0/bin:/usr/local/bin:$PATH
 ZSH_DISABLE_COMPFIX="true"
-ZSH_DISABLE_COMPFIX="true"
 
 . ~/.profile
 . "$HOME/.cache/wal/colors.sh"
@@ -36,6 +35,8 @@ alias rr="ranger"
 alias nn="nvim"
 alias mm="mutt"
 alias cls="clear"
+alias jl="jupyter-lab"
+alias libgen="libgen-downloader"
 
 # Lazy systemctl bindings
 alias sctle="sudo systemctl enable"
@@ -49,6 +50,14 @@ sudo pacman -Qi $1 |
   awk '/(^Name)|(^Required By)|(^Optional For)/'
 }
 alias pacorp="pacman -Qtdq | sudo pacman -Rns -"
+
+# AUR workflow
+function buildaur() {
+    makepkg -f &&
+        updpkgsums &&
+        makepkg --printsrcinfo > .SRCINFO &&
+        git add -f .SRCINFO PKGBUILD
+}
 
 # Filetype bindings
 alias -s pdf=zathura
@@ -66,18 +75,11 @@ export SHELL="/usr/bin/zsh"
 
 # Rice bindings
 gibraltar_wallpaper(){
-
-    if [ $1 != "" ]
-    then
-        new_wallpaper=$1;
-    else
-        new_wallpaper=$(nsxiv -otqrf ~/Wallpapers) || echo "Usage: gibraltar_wallpaper <PATH_TO_IMAGE>";
-        sed -i 's|RICE_WALLPAPER=.*|RICE_WALLPAPER='$new_wallpaper'|' $HOME/.profile
-        $HOME/bin/i3start.sh;
-    fi
+    x=$1;sed -i 's|RICE_WALLPAPER=.*|RICE_WALLPAPER='$x'|' $HOME/.profile
+    $HOME/bin/i3start.sh
 }
 gibraltar_theme(){
-    x=$1;sed -i 's|RICE_THEME=.*|RICE_THEME='$x'|' $HOME/.profile;
+    x=$1;sed -i 's|RICE_THEME=.*|RICE_THEME='$x'|' $HOME/.profile
     $HOME/bin/i3start.sh
 }
 
@@ -107,6 +109,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 
+# Display manager
 if [ "$TERM" = "linux" ]; then
     tbsm
 fi

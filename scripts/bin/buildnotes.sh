@@ -8,12 +8,12 @@ makepdf () {
     # Remove accidentally created files
     find . -iname '*.autosave.xopp.pdf' -exec rm {} \;
 }
-
+> home/ayush/.publishlog
 # Search documents for binders
-for d in ~/Documents/*/ ; do
-    [ -d "$d/.publish" ] && cd "$d" && makepdf && echo "Built $d" >> /home/ayush/cronfu.txt
+for d in /home/ayush/Documents/*/ ; do
+    [ -d "$d/.publish" ] && cd "$d" && makepdf && echo "Built $d" >> /home/ayush/.publishlog
 done
+echo "$(date)" >> /home/ayush/.publishlog
 
 #TODO
-#sed out the autosave.xopp.pdf
 #remove rulings
