@@ -17,6 +17,9 @@ pywalfox update
 # Restart notification daemon
 pkill dunst; dunst &
 
+# Launch polybar
+~/.config/polybar/launch.sh
+
 # Update lockscreen image
 betterlockscreen -u $RICE_WALLPAPER
 

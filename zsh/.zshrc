@@ -24,11 +24,27 @@ plugins=(zsh-syntax-highlighting colored-man-pages forgit compleat)
 source $ZSH/oh-my-zsh.sh
 
 # Set editor
-if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='vim'
+#if [[ -n $SSH_CONNECTION ]]; then
+    #export EDITOR='vim'
+#else
+    #export EDITOR='nvim'
+#fi
+
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    ZSH_THEME="masalaprompt-ssh" && source ~/.oh-my-zsh/oh-my-zsh.sh
 else
-    export EDITOR='nvim'
+    ZSH_THEME="masalaprompt" && source ~/.oh-my-zsh/oh-my-zsh.sh
 fi
+
+# Lazy git bindings
+alias ggrph="git log --graph"
+alias gstat="git status"
+alias gstag="git add -A"
+alias gdiff="git status -s \
+ | fzf --no-sort --reverse \
+ --preview 'git diff --color=always {+2} | diff-so-fancy' \
+ --bind=ctrl-j:preview-down --bind=ctrl-k:preview-up \
+ --preview-window=right:60%:wrap"
 
 # Lazy app bindings
 alias rr="ranger"
