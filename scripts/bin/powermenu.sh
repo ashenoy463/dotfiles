@@ -17,9 +17,12 @@ chosen=$(echo -e "Logout\nShutdown\nReboot" | rofi -font "Roboto Mono Medium 10"
 # https://www.freedesktop.org/software/systemd/man/systemd-sleep.conf.html#Description
 
 if [[ $chosen = "Logout" ]]; then
+    tmux kill-server
 	i3exit logout
 elif [[ $chosen = "Shutdown" ]]; then
+    tmux kill-server
 	systemctl poweroff
 elif [[ $chosen = "Reboot" ]]; then
+    tmux kill-server
 	systemctl reboot
 fi

@@ -246,13 +246,13 @@ nnoremap <leader>f :Files<CR>
 nnoremap <silent> <C-f> :Rg<CR>
 
 " Source con figs after editing them
-augroup configsource
-    autocmd BufWritePost bm-files,bm-dirs !shortcuts
-    autocmd BufRead,BufNewFile Xresources,Xdefaults,xresources,xdefaults set filetype=xdefaults
-    autocmd BufWritePost Xresources,Xdefaults,xresources,xdefaults !xrdb %
-    autocmd BufWritePost .zshrc !source %
-    "autocmd BufWritePost init.vim source %
-augroup END
+"augroup configsource
+    "autocmd BufWritePost bm-files,bm-dirs !shortcuts
+    "autocmd BufRead,BufNewFile Xresources,Xdefaults,xresources,xdefaults set filetype=xdefaults
+    "autocmd BufWritePost Xresources,Xdefaults,xresources,xdefaults !xrdb %
+    "autocmd BufWritePost .zshrc !source %
+    ""autocmd BufWritePost init.vim source %
+"augroup END
 
 " LaTeX Settings
 autocmd Filetype tex setl updatetime=1000

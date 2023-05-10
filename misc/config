@@ -9,3 +9,11 @@ Host gitlab.com
 Host github.com
   PreferredAuthentications publickey
   IdentityFile ~/.ssh/github
+
+Host schrodinger
+  Hostname 192.168.0.2
+  IdentityFile ~/.ssh/id_rsa
+
+Host gauss
+  Hostname 192.168.0.3
+  IdentityFile ~/.ssh/id_rsa

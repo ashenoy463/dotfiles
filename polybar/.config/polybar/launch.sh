@@ -9,4 +9,4 @@ killall -q polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 # Launch Polybar, using default config location ~/.config/polybar/config
-polybar -c $CONF_POLYBAR $RICE_BAR &
+polybar -c $CONF_POLYBAR $RICE_BAR 2>&1 | tee -a /tmp/polybar.log & disown
