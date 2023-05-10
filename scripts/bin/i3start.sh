@@ -20,6 +20,9 @@ pkill dunst; dunst &
 # Launch polybar
 ~/.config/polybar/launch.sh
 
+# Scratchpads
+~/bin/i3scratchpads.sh
+
 # Update lockscreen image
 betterlockscreen -u $RICE_WALLPAPER
 

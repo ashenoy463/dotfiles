@@ -115,8 +115,6 @@ for_window[instance="drop_calc"] move absolute position 550 -10
 for_window[instance="drop_calc"] move scratchpad
 for_window[instance="drop_music"] move absolute position center
 #
-# Initialize scratchpads
-exec_always ~/bin/i3scratchpads.sh
 ## Scratchpad Bindings
 bindsym $mod+m [instance="drop_music"] scratchpad show
 bindsym $mod+Delete [instance="drop_monitor"] scratchpad show

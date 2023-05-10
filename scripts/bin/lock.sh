@@ -1,3 +1,4 @@
-dunstctl set-paused true
+#dunstctl set-paused true
+playerctl pause
 betterlockscreen -l blur
-dunstctl is-paused false
+#dunstctl set-paused false

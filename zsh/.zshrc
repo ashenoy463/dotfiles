@@ -6,8 +6,6 @@ ZSH_DISABLE_COMPFIX="true"
 
 export ZSH=$HOME/.oh-my-zsh
 
-ZSH_THEME="masalaprompt" # set by `omz`
-
 CASE_SENSITIVE="true"
 # HYPHEN_INSENSITIVE="true"
 
@@ -19,21 +17,15 @@ HIST_STAMPS="dd/mm/yyyy"
 
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-plugins=(zsh-syntax-highlighting colored-man-pages forgit compleat)
+plugins=(zsh-syntax-highlighting colored-man-pages compleat)
 
-source $ZSH/oh-my-zsh.sh
-
-# Set editor
-#if [[ -n $SSH_CONNECTION ]]; then
-    #export EDITOR='vim'
-#else
-    #export EDITOR='nvim'
-#fi
-
+# Set defaults for SSH connections
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     ZSH_THEME="masalaprompt-ssh" && source ~/.oh-my-zsh/oh-my-zsh.sh
+    export EDITOR='vim'
 else
     ZSH_THEME="masalaprompt" && source ~/.oh-my-zsh/oh-my-zsh.sh
+    export EDITOR='nvim'
 fi
 
 # Lazy git bindings
@@ -52,7 +44,7 @@ alias nn="nvim"
 alias mm="mutt"
 alias cls="clear"
 alias jl="jupyter-lab"
-alias libgen="libgen-downloader"
+alias ytdl="yt-dlp"
 
 # Lazy systemctl bindings
 alias sctle="sudo systemctl enable"
