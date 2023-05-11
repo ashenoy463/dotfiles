@@ -1,0 +1,7 @@
+tbsm
+betterlockscreen
+python-pywalfox
+nsxiv
+qt5-styleplugins
+batsignal
+
