@@ -322,7 +322,7 @@ song_columns_list_format = (20)[]{a} (6f)[green]{NE} (50)[white]{t|f:Title} (20)
 ## Note: Custom command that will be executed each time song changes. Useful for
 ## notifications etc.
 ##
-execute_on_song_change = "~/bin/mpdnotify.sh"
+execute_on_song_change = "mpdnotify.sh"
 #
 ##
 ## Note: Custom command that will be executed each time player state

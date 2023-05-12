@@ -1,4 +1,4 @@
-export PATH=$HOME/bin:$HOME/.local/bin/:$HOME/go:$HOME/.local/share/gem/ruby/3.0.0/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin/:$HOME/go:$HOME/.local/share/gem/ruby/3.0.0/bin:/usr/local/bin:$PATH
 ZSH_DISABLE_COMPFIX="true"
 
 . ~/.profile
