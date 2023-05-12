@@ -1,6 +1,6 @@
 * {{
-    active-background: {color1};
-    active-foreground: @foreground;
+    active-background: {color2};
+    active-foreground: @background;
     normal-background: @background;
     normal-foreground: @foreground;
     urgent-background: {color3};
@@ -13,10 +13,10 @@
     alternate-urgent-background: @background;
     alternate-urgent-foreground: @foreground;
 
-    selected-active-background: {color3};
-    selected-active-foreground: @foreground;
+    selected-active-background: {color2};
+    selected-active-foreground: @background;
     selected-normal-background: {color1};
-    selected-normal-foreground: @foreground;
+    selected-normal-foreground: @background;
     selected-urgent-background: {color3};
     selected-urgent-foreground: @foreground;
 
@@ -29,7 +29,8 @@
 
 #window {{
     background-color: @background;
-    border: 0;
+    border: 1px;
+    border-radius: 8px;
     padding: 2.5ch;
 }}
 
@@ -69,8 +70,10 @@
 }}
 
 #element {{
-    border: 0;
-    padding: 1px;
+    border: 1px;
+    border-radius:5px;
+    padding: 2px;
+    margin-left: 10px;
 }}
 
 #element.normal.normal {{
@@ -120,8 +123,9 @@
 
 #scrollbar {{
     width: 4px;
-    border: 0;
-    handle-width: 8px;
+    border: 2;
+    border-radius:12px;
+    handle-width: 4px;
     padding: 0;
 }}
 
