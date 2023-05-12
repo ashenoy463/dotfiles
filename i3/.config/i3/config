@@ -48,7 +48,12 @@ bindsym $mod+x exec rofi -font "Roboto Mono Medium 10" -show window
 bindsym $mod+o exec rofi -font "Roboto Mono Medium 10" -show filebrowser
 #
 ## Lock screen
-bindsym $mod+Ctrl+l exec ~/bin/lock.sh
+bindsym $mod+Ctrl+l exec lock.sh
+exec --no-startup-id xss-lock -- lock.sh
+#
+##
+bindsym $mod+Ctrl+m exec mount.sh
+bindsym $mod+Ctrl+Shift+m exec unmount.sh
 #
 ## Notification Hotkeys
 bindsym Ctrl+grave exec dunstctl history-pop
@@ -59,7 +64,7 @@ bindsym Ctrl+Shift+space exec dunstctl close-all
 #TODO
 #
 ## Clipboard
-bindsym $mod+Ctrl+v exec ~/bin/showclip.sh
+bindsym $mod+Ctrl+v exec showclip.sh
 #
 ## Reload Config
 bindsym $mod+Shift+c reload
@@ -68,7 +73,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 #
 ## Power Menu
-bindsym $mod+Ctrl+e exec ~/bin/powermenu.sh 
+bindsym $mod+Ctrl+e exec powermenu.sh 
 #
 #
 # ANCILLARY KEYBINDS
@@ -76,9 +81,9 @@ bindsym $mod+Ctrl+e exec ~/bin/powermenu.sh
 ## Start Applications
 bindsym $mod+F2 exec firefox
 bindsym $mod+F3 exec ranger
-bindsym Print exec --no-startup-id bash ~/bin/screenshot.sh -s
-bindsym $mod+Print --release exec --no-startup-id bash ~/bin/screenshot.sh -r
-bindsym $mod+Shift+Print --release exec --no-startup-id bash ~/bin/screenshot.sh -r -t 5
+bindsym Print exec --no-startup-id bash screenshot.sh -s
+bindsym $mod+Print --release exec --no-startup-id bash screenshot.sh -r
+bindsym $mod+Shift+Print --release exec --no-startup-id bash /screenshot.sh -r -t 5
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 #
 ## Move to scratchpad
@@ -176,6 +181,8 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 #assign [class="discord"] $ws4
 assign [class="Code"] $ws4
 assign [class="firefox"] $ws3
+assign [class="Zathura"] $ws1
+assign [class="Xournalpp"] $ws1
 ### Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="calamares"] floating enable border normal
@@ -204,7 +211,7 @@ for_window [class="Skype"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
-for_window [class="sxiv"] floating enable
+for_window [class="nsxiv"] floating enable
 for_window [title="Picture-in-Picture"] floating enable sticky enable border pixel 1
 for_window [class="Dwarf_Fortress"] floating enable border normal
 for_window [class="Code"] border pixel 1
@@ -366,10 +373,10 @@ mode "resize" {
 #
 ## System
 exec_always --no-startup-id source ~/.profile
-exec_always --no-startup-id bash ~/bin/i3start.sh
+exec_always --no-startup-id bash i3start.sh
 #
 ## Applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 #
 ## Workspace Setup
-exec --no-startup-id bash ~/bin/i3setup.sh
+exec --no-startup-id bash i3setup.sh
