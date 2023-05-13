@@ -1,9 +1,8 @@
 #!/bin/sh
 
 # Kill running scratchpads
-pgrep -f urxvt\ -name\ drop_ | xargs kill
-xrdb ~/.Xresources
+pgrep -f "st -c drop_*" | xargs kill
 # Start each scratchpad
-urxvt -name drop_calc -hold -e bc -l &
-urxvt -name drop_monitor -hold -e setupcadmenu.sh &
-urxvt -name drop_music -hold -e sh -c "ncmpcpp -q 2> /dev/null" &
+st -c drop_calc sh -c "bc -l" &
+st -c drop_monitor sh -c "setupcadmenu.sh" &
+st -c drop_music sh -c "ncmpcpp --quiet 2> /dev/null" &

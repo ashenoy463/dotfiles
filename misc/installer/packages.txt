@@ -41,3 +41,12 @@ ttf-terminus-nerd
 zsh
 tig
 ueberzug
+ncdu
+xorg-xinput
+xorg-xwininfo
+xss-lock
+mutt
+bluez
+bluez-util
+manjaro-bluetooth
+bluedevil

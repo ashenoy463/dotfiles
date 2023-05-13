@@ -18,7 +18,7 @@ pywalfox update
 pkill dunst; dunst &
 
 # Launch polybar
-~/.config/polybar/launch.sh
+~/.config/polybar/launch.sh &
 
 # Scratchpads
 i3scratchpads.sh
@@ -28,3 +28,5 @@ betterlockscreen -u $RICE_WALLPAPER
 
 # Send notification
 notify-send -u low "[Gibraltar]" "Initialization complete"
+
+
