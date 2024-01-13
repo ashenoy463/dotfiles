@@ -45,6 +45,7 @@ alias mm="mutt"
 alias cls="clear"
 alias jl="jupyter-lab"
 alias ytdl="yt-dlp"
+alias teams="teams-for-linux"
 
 # Lazy systemctl bindings
 alias sctle="sudo systemctl enable"
@@ -84,11 +85,11 @@ export SHELL="/usr/bin/zsh"
 # Rice bindings
 gibraltar_wallpaper(){
     x=$1;sed -i 's|RICE_WALLPAPER=.*|RICE_WALLPAPER='$x'|' $HOME/.profile
-    $HOME/bin/i3start.sh
+    $HOME/.local/bin/i3start.sh
 }
 gibraltar_theme(){
     x=$1;sed -i 's|RICE_THEME=.*|RICE_THEME='$x'|' $HOME/.profile
-    $HOME/bin/i3start.sh
+    $HOME/.local/bin/i3start.sh
 }
 
 # Add rss to newsboat
@@ -121,3 +122,5 @@ export XDG_DATA_HOME="$HOME/.local/share"
 if [ "$TERM" = "linux" ]; then
     tbsm
 fi
+
+eval $(thefuck --alias)

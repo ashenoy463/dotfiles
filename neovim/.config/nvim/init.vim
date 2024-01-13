@@ -24,17 +24,16 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " Autocomplete
 Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
-Plug 'ncm2/ncm2-cssomni'
-Plug 'ncm2/ncm2-jedi'
+"Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
+"Plug 'ncm2/ncm2-cssomni'
+"Plug 'ncm2/ncm2-jedi'
 Plug 'ncm2/ncm2-match-highlight'
 Plug 'ncm2/ncm2-ultisnips'
 Plug 'lervag/vimtex'
 Plug 'jiangmiao/auto-pairs'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'     " Enables snippet actions
+Plug 'honza/vim-snippets'   " Actually provides snippets for ultisnips
 " Formatting and Linting
 Plug 'dense-analysis/ale'
 Plug 'Chiel92/vim-autoformat'
@@ -45,6 +44,7 @@ Plug 'jreybert/vimagit'
 Plug 'airblade/vim-gitgutter'
 Plug 'xuyuanp/nerdtree-git-plugin'
 " UI Features
+Plug 'frabjous/knap'
 Plug 'BurntSushi/ripgrep'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -59,10 +59,9 @@ Plug 'mbbill/undotree'
 Plug 'lilydjwg/colorizer'
 " Others
 Plug 'rbgrouleff/bclose.vim' " Required for ranger
+Plug 'roxma/nvim-yarp'       " Required for ncm2
 Plug 'dylanaraps/wal.vim'
 Plug 'masala-man/vimala'
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
 call plug#end()
 "Plug 'nvim-lua/plenary.nvim' "Required for telescope
 "Plug 'nvim-telescope/telescope.nvim'
@@ -236,6 +235,8 @@ nnoremap <leader><CR> :<C-u>call BreakHere()<CR>
 " Templates
 augroup templates
     autocmd BufNewFile *.sh 0r $VIMHOME/templates/skeleton.sh
+    autocmd BufNewFile *.md 0r $VIMHOME/templates/skeleton.md
+    autocmd BufNewFile *.rmd 0r $VIMHOME/templates/skeleton.md
 augroup END
 
 " Fuzzyfinder
@@ -245,21 +246,24 @@ let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 nnoremap <leader>f :Files<CR>
 nnoremap <silent> <C-f> :Rg<CR>
 
-" Source con figs after editing them
+" Source configs after editing them
 "augroup configsource
-    "autocmd BufWritePost bm-files,bm-dirs !shortcuts
-    "autocmd BufRead,BufNewFile Xresources,Xdefaults,xresources,xdefaults set filetype=xdefaults
-    "autocmd BufWritePost Xresources,Xdefaults,xresources,xdefaults !xrdb %
-    "autocmd BufWritePost .zshrc !source %
-    ""autocmd BufWritePost init.vim source %
+   "autocmd BufWritePost bm-files,bm-dirs !shortcuts
+   "autocmd BufRead,BufNewFile Xresources,Xdefaults,xresources,xdefaults set filetype=xdefaults
+   "autocmd BufWritePost Xresources,Xdefaults,xresources,xdefaults !xrdb %
+   "autocmd BufWritePost .zshrc !source %
+   "autocmd BufWritePost init.vim source %
 "augroup END
 
 " LaTeX Settings
 autocmd Filetype tex setl updatetime=1000
-autocmd Filetype tex nnoremap <leader>v :VimtexCompile<CR>
-autocmd BufWritePost *.tex silent :!texclear.sh "%:p"
+augroup texcleanup
+    autocmd BufWinLeave *.tex silent :!texclear.sh "%:p"
+    autocmd ExitPre *.tex silent :!texclear.sh "%:p"
+augroup END
 autocmd FileType tex nnoremap <buffer> <C-T> :VimtexTocToggle<CR><C-L>
 autocmd FileType tex inoremap <buffer> <C-T> <esc>:VimtexTocToggle<CR><C-L>i
+let g:vimtex_complete_enabled = 0
 let g:vimtex_toc_config = {
             \ 'name' : 'TOC',
             \ 'layers' : ['content', 'todo', 'include'],
@@ -271,14 +275,23 @@ let g:vimtex_toc_config = {
             \ 'mode' : 2,
             \}
 
-" Markdown preview
-let g:pandoc#command#autoexec_on_writes = 0
-augroup markdownpreview
-    autocmd BufWritePost *.rmd silent !pandoc -o "%:r_preview.pdf" "%:p" --pdf-engine pdflatex --quiet --metadata-file=/home/ayush/.config/nvim/pandoc_latex.yaml
-    autocmd Filetype rmd nnoremap <silent> <leader>v :!opout.sh "%:r_preview.rmd"<CR>
-    autocmd BufLeave *.rmd :!rm "%:r_preview.pdf""
-augroup END
-let g:pandoc#modules#disabled = ["folding"]
+" LaTeX/Markdown live previews
+autocmd Filetype markdown nnoremap <silent> <leader>v :lua require("knap").toggle_autopreviewing()<CR>
+autocmd Filetype rmd nnoremap <silent> <leader>v :lua require("knap").toggle_autopreviewing()<CR>
+autocmd Filetype tex nnoremap <silent> <leader>v :lua require("knap").toggle_autopreviewing()<CR>
+let g:knap_settings = {
+    \ "textopdfviewerlaunch": "zathura --synctex-editor-command 'nvim --headless -es --cmd \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%{input}'\"'\"',%{line},0)\"' %outputfile%",
+    \ "textopdfviewerrefresh": "none",
+    \ "textopdfforwardjump": "zathura --synctex-forward=%line%:%column%:%srcfile% %outputfile%",
+    \ "mdoutputext": "pdf",
+    \ "mdtopdf": "pandoc %docroot% -o %outputfile% --template ~/.config/nvim/pandoc_latex_eisvogel.tex",
+    \ "mdtopdfviewerlaunch": "zathura --synctex-editor-command 'nvim --headless -es --cmd \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%{input}'\"'\"',%{line},0)\"' %outputfile%",
+    \ "mdtopdfviewerrefresh": "none",
+    \ "rmdoutputext": "pdf",
+    \ "rmdtopdf": "pandoc %docroot% -o %outputfile% --template ~/.config/nvim/pandoc_latex_eisvogel.tex",
+    \ "rmdtopdfviewerlaunch": "zathura --synctex-editor-command 'nvim --headless -es --cmd \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%{input}'\"'\"',%{line},0)\"' %outputfile%",
+    \ "rmdtopdfviewerrefresh": "none"
+\ }
 
 " Syntax conceal
 nnoremap <leader><leader>c :call ToggleConceal()<CR>
@@ -290,7 +303,7 @@ function! ToggleConceal()
     endif
 endfunction
 
- "Mutt
+" Mutt
 autocmd BufReadPost mutt-* :Goyo
 
 " Quick spelling correction

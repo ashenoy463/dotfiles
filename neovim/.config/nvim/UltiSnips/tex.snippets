@@ -29,7 +29,7 @@ snippet template "Basic template" b
 endsnippet
 
 snippet mk "Inline Math" w
-$${1}$ $0
+$ ${1} $ $0
 endsnippet
 
 snippet dm "Display Math" w
@@ -59,12 +59,12 @@ endsnippet
 
 context "math()"
 snippet alpha "alpha" Aw
-\alpha 
+\alpha$0
 endsnippet
     
 context "math()"
 snippet beta "beta" Aw
-\beta
+\beta 
 endsnippet
     
 context "math()"
@@ -471,6 +471,11 @@ endsnippet
 context "math()"
 snippet aleph "Aleph"
 \aleph
+endsnippet
+
+# Utility
+snippet dbt "Doubt in red"
+\textcolor{red}{$1} $0
 endsnippet
 
 # LIMITS

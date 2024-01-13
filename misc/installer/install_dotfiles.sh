@@ -9,7 +9,7 @@ sudo pacman -R manjaro-zsh-config
 pip3 install flake8 neovim autoflake notify-send-py ncm
 
 sudo pacman -S - < packages.txt
-pamac build aur.txt
+pamac build packages_aur.txt
 
 
 # Config variables
