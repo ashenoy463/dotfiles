@@ -17,7 +17,7 @@ gibraltar_wallpaper ~/Wallpapers/mywallpaper.png
 
 ## Screenshots
 
-![](https://i.imgur.com/cOECjNA.png)
-![](https://i.imgur.com/MyOye8W.png)
-![](https://i.imgur.com/Edn76VK.png)
-![](https://i.imgur.com/HdkYQDq.png)
+![](https://i.imgur.com/gNlBQbo.png)
+![](https://i.imgur.com/ASvDTuP.png)
+![](https://i.imgur.com/UzAMkQ7.png)
+![](https://i.imgur.com/SfiGVpI.png)
