@@ -18,10 +18,7 @@ pywalfox update
 pkill dunst; dunst &
 
 # Launch polybar
-~/.config/polybar/launch.sh &
-
-# Scratchpads
-i3scratchpads.sh
+~/.config/polybar/colorblocks/launch.sh &
 
 # Update lockscreen image
 betterlockscreen -u $RICE_WALLPAPER

@@ -1,7 +1,7 @@
 ---
 title: ""
-author: [Ayush Shenoy]
-date: "--"
-keywords: []
+author: []
+date: ""
 ...
 
+# 

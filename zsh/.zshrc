@@ -46,6 +46,7 @@ alias cls="clear"
 alias jl="jupyter-lab"
 alias ytdl="yt-dlp"
 alias teams="teams-for-linux"
+alias ncmpcpp="ncmpcpp 2> /dev/null"
 
 # Lazy systemctl bindings
 alias sctle="sudo systemctl enable"

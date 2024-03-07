@@ -39,13 +39,15 @@ bindsym $mod+Shift+q kill
 bindsym $mod+Return exec $terminal
 #
 ## Application Launcher
-bindsym $mod+d exec --no-startup-id rofi -font "Roboto Mono Medium 10" -show run -run-shell-command 'zsh -ic "{cmd} && read"'
+bindsym $mod+d exec --no-startup-id ~/.config/polybar/colorblocks/scripts/launcher.sh
 #
 ## Window Switcher
-bindsym $mod+x exec rofi -font "Roboto Mono Medium 10" -show window
+bindsym $mod+x exec layout_manager.sh
 #
 ## File Browser
-bindsym $mod+o exec rofi -font "Roboto Mono Medium 10" -file-browser-depth 0 -show file-browser-extended -file-browser-dir ~/Books/STEM\
+bindsym $mod+o exec rofi -theme ~/.config/polybar/colorblocks/scripts/rofi/launcher.rasi -file-browser-depth 0 -show file-browser-extended -file-browser-dir ~/Books/STEM\
+## Paper Browser
+bindsym $mod+p exec "python3 ~/.local/bin/rofi-zotero"
 #
 ## Lock screen
 bindsym $mod+Ctrl+l exec lock.sh
@@ -111,6 +113,7 @@ bindsym XF86AudioPrev exec playerctl previous
 #
 ## Scratchpad Bindings
 bindsym $mod+m exec i3sp -acc -tu "ncmpcpp 2> /dev/null"
+bindsym $mod+t exec i3sp -acc -t "st"
 bindsym $mod+Delete exec i3sp -acc -d1500x800 -tu "setupcadmenu.sh"
 bindsym $mod+c exec i3sp -atc -d500x200 -tu "ccalc"
 #
@@ -168,9 +171,10 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 #
 ### Open applications on specific workspaces
 assign [class="discord"] $ws5
+assign [class="Zotero"] $ws5
+assign [class="obsidian"] $ws5
 assign [class="Code" instance="code" window_role="browser-window"] $ws1
-assign [class="obsidian"] $ws4
-assign [class="firefox"] $ws3
+assign [class="firefox"] $ws4
 #assign [class="Zathura"] $ws1
 assign [class="Xournalpp"] $ws1
 ### Open specific applications in floating mode
@@ -206,6 +210,7 @@ for_window [title="Picture-in-Picture"] floating enable sticky enable border pix
 for_window [class="Dwarf_Fortress"] floating enable border normal
 for_window [class="Code"] border pixel 1
 for_window [class="Piper"] floating enable
+for_window [class="URxvt" title="^nagbar"] floating enable
 # https://github.com/ValveSoftware/steam-for-linux/issues/1040
 for_window [class="^Steam$" title="^Friends$"] floating enable
 for_window [class="^Steam$" title="Steam - News"] floating enable
@@ -225,7 +230,8 @@ for_window [class="^$" title="^\*.ode"] floating enable
 for_window [class="^$" title="^Equations$"] floating enable
 for_window [class="^$" title="^Boundary Conds$"] floating enable
 #for_window [title="^Data Viewer$"] floating enable
-for_window [title="^VMD"] floating enable resize set 500 500
+#for_window [title="^VMD"] floating enable resize set 500 500 
+#for_window [title="Graphical Representations"] floating enable resize set 500 500
 #
 # THEMING
 #
@@ -365,10 +371,13 @@ mode "resize" {
 ## System
 exec_always --no-startup-id source ~/.profile
 exec_always --no-startup-id bash ~/.local/bin/i3start.sh
+exec_always --no-startup-id bash ~/.local/bin/wacomconfigure.sh
+exec_always --no-startup-id bash ~/.local/bin/droidcamconfigure.sh
 #
 ## Applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id obsidian
+#exec --no-startup-id obsidian
+exec --no-startup-id code
 #
 ## Workspace Setup
 exec --no-startup-id bash ~/.local/bin/i3setup.sh

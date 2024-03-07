@@ -57,6 +57,8 @@ Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-startify'
 Plug 'mbbill/undotree'
 Plug 'lilydjwg/colorizer'
+Plug 'romainl/vim-qf'
+Plug 'tpope/vim-surround'
 " Others
 Plug 'rbgrouleff/bclose.vim' " Required for ranger
 Plug 'roxma/nvim-yarp'       " Required for ncm2
@@ -264,6 +266,7 @@ augroup END
 autocmd FileType tex nnoremap <buffer> <C-T> :VimtexTocToggle<CR><C-L>
 autocmd FileType tex inoremap <buffer> <C-T> <esc>:VimtexTocToggle<CR><C-L>i
 let g:vimtex_complete_enabled = 0
+let g:vimtex_quickfix_enabled = 0
 let g:vimtex_toc_config = {
             \ 'name' : 'TOC',
             \ 'layers' : ['content', 'todo', 'include'],
@@ -278,7 +281,7 @@ let g:vimtex_toc_config = {
 " LaTeX/Markdown live previews
 autocmd Filetype markdown nnoremap <silent> <leader>v :lua require("knap").toggle_autopreviewing()<CR>
 autocmd Filetype rmd nnoremap <silent> <leader>v :lua require("knap").toggle_autopreviewing()<CR>
-autocmd Filetype tex nnoremap <silent> <leader>v :lua require("knap").toggle_autopreviewing()<CR>
+autocmd Filetype tex nnoremap <silent> <leader>v :VimtexCompile<CR>
 let g:knap_settings = {
     \ "textopdfviewerlaunch": "zathura --synctex-editor-command 'nvim --headless -es --cmd \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%{input}'\"'\"',%{line},0)\"' %outputfile%",
     \ "textopdfviewerrefresh": "none",

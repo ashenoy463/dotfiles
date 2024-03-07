@@ -12,7 +12,7 @@
 # - Run it
 . ~/.cache/wal/colors.sh
 
-chosen=$(echo -e "Logout\nShutdown\nReboot" | rofi -font "Roboto Mono Medium 10" -dmenu)
+chosen=$(echo -e "Logout\nShutdown\nReboot" | rofi -theme ~/.config/polybar/colorblocks/scripts/rofi/launcher.rasi -font "Roboto Mono Medium 10" -dmenu)
 # Info about some states are available here:
 # https://www.freedesktop.org/software/systemd/man/systemd-sleep.conf.html#Description
 
