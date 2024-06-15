@@ -474,6 +474,9 @@ snippet aleph "Aleph"
 endsnippet
 
 # Utility
+
+## Diary
+
 snippet dbt "Doubt question"
 \textcolor{red}{$1} $0
 endsnippet
@@ -492,10 +495,36 @@ snippet aiqa "Answer to action item"
 \end{itemize}$0
 endsnippet
 
+snippet aiqp "Answer to action item pending"
+\begin{itemize}
+	\item \emph{\textcolor{red}{\textbf{pending}}}
+\end{itemize}$0
+endsnippet
+
 snippet --- "Em dash" Aw
 \textbf{---}
 endsnippet
 
+snippet TODO "Todo comment" w
+%TODO
+% $1
+%TODO
+$0
+endsnippet
+
+## Plans
+
+#snippet plitm "Plan Item Window"
+#\item $1-$2 : \emph{$3 ($4) @ $5}$0
+#endsnippet
+
+#snippet plitmfull "Monthlong Plans"
+#\item Full : \emph{$3 ($4) @ $5}$0
+#endsnippet
+
+#snippet plapp "Application Windows"
+#\item \textcolor{red}{ $1-$2 : \emph{$3 ($4) @ $5}}$0
+#endsnippet
 
 # LIMITS
 # FUNCTIONS

@@ -51,7 +51,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'francoiscabrol/ranger.vim'
-"Plug 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine'
 Plug 'scrooloose/nerdtree'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-startify'
@@ -70,6 +70,7 @@ call plug#end()
 
 " UI
 colorscheme wal
+set notermguicolors t_Co=16
 syntax on
 syntax enable
 set number
@@ -182,10 +183,9 @@ let g:NERDTreeHighlightFolders = 1
 let g:NERDTreeHighlightFoldersFullName = 1
 
 " Indentline
-"let g:indentLine_fileTypeExclude = ['tex','markdown']
-"let g:indentLine_char = '|'
-"let g:indentLine_conceallevel = 1
-"autocmd * StartifyReady IndentLinesDisable
+let g:indentLine_char = '|'
+let g:indentLine_conceallevel = 1
+let g:indentLine_fileTypeExclude = [ 'startify' , 'tex']
 
 
 " Startify
