@@ -1,3 +1,5 @@
+# VCS
+#
 Host aur.archlinux.org
   IdentityFile ~/.ssh/aur
   User aur
@@ -9,7 +11,9 @@ Host gitlab.com
 Host github.com
   PreferredAuthentications publickey
   IdentityFile ~/.ssh/github
-
+  
+# Home Network
+#
 Host schrodinger
   Hostname 192.168.0.2
   IdentityFile ~/.ssh/id_rsa
@@ -17,3 +21,30 @@ Host schrodinger
 Host gauss
   Hostname 192.168.0.3
   IdentityFile ~/.ssh/id_rsa
+
+# USF CSM Lab
+#
+# Compute | RTX 4070Ti
+Host cantor
+    Hostname cantor.cas.usf.edu
+    User ayush
+#
+# Compute | RTX 3090Ti
+Host csmlab1
+    Hostname csmlab1.cas.usf.edu
+    User ayush
+#
+# Compute | RTX 3090Ti
+Host csmlab3
+    Hostname csmlab3.cas.usf.edu
+    User ayush
+#
+# Compute | RTX 4070Ti
+Host csmlab4
+    Hostname csmlab4.cas.usf.edu
+    User ayush
+#
+# Fileserver | Wiki
+Host csmlab5
+    Hostname csmlab5.cas.usf.edu
+    User ayush
