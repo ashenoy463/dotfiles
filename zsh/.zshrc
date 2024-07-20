@@ -1,8 +1,8 @@
 export PATH=$HOME/.local/bin/:$HOME/go:$HOME/.local/share/gem/ruby/3.0.0/bin:/usr/local/bin:$PATH
 ZSH_DISABLE_COMPFIX="true"
 
-. ~/.profile
-. "$HOME/.cache/wal/colors.sh"
+#. ~/.profile
+#. "$HOME/.cache/wal/colors.sh"
 
 export ZSH=$HOME/.oh-my-zsh
 
@@ -17,7 +17,7 @@ HIST_STAMPS="dd/mm/yyyy"
 
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-plugins=(zsh-syntax-highlighting colored-man-pages compleat)
+plugins=(zsh-syntax-highlighting)
 
 # Set defaults for SSH connections
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
@@ -124,4 +124,12 @@ if [ "$TERM" = "linux" ]; then
     tbsm
 fi
 
-eval $(thefuck --alias)
+# Colored manpages
+export MANPAGER="less -R --use-color -Dd+r -Du+b"
+export MANROFFOPT="-P -c"
+
+#alias rangercd='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
+#bindkey -s '^o' 'rangercd^M'
+
+alias dwarffortress=/home/ayush/.dwarffortress/dfhack
+

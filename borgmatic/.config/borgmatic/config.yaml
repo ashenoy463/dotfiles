@@ -1,0 +1,49 @@
+
+source_directories:
+  - /home/ayush/Books
+  - /home/ayush/Code
+  - /home/ayush/Documents
+  - /home/ayush/Downloads
+  - /home/ayush/dotfiles
+  - /home/ayush/Pictures
+  - /home/ayush/Videos
+  - /home/ayush/Zotero
+  - /home/ayush/.config
+  - /home/ayush/.ssh
+
+
+repositories:
+  - path: /store/Backups/backup_schrodinger
+    label: localstore
+
+exclude_patterns:
+     - '*.pyc'
+     #- /home/ayush/.cache
+     - '*/.vim*.tmp'
+     - /home/ayush/*/.venv
+
+exclude_if_present:
+  - .nobackup
+
+# Retention policy
+keep_daily: 7
+keep_weekly: 4
+keep_monthly: 6
+
+checks:
+  - name: repository
+  - name: archives
+    frequency: 2 weeks
+
+#before_backup:
+    #- prepare-for-backup.sh
+
+# Configuration for a monitoring integration with Healthchecks. Create
+# an account at https://healthchecks.io (or self-host Healthchecks) if
+# you'd like to use this service. See borgmatic monitoring
+# documentation for details.
+healthchecks:
+  ping_url: https://hc-ping.com/ba8b8561-0b18-41fb-8c23-f314dfc6438d
+  send_logs: false
+  states:
+    - finish
