@@ -1,4 +1,4 @@
-export PATH=$HOME/.local/bin/:$HOME/go:$HOME/.local/share/gem/ruby/3.0.0/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin/:$HOME/go:$HOME/.local/share/gem/ruby/3.0.0/bin:/usr/local/bin:$HOME/Thesis/software/qe-7.4.1/bin:$HOME/Thesis/software/qe-7.4.1/PW/tools:$HOME/Thesis/software/xcrysden-1.6.2/bin:$PATH
 ZSH_DISABLE_COMPFIX="true"
 
 #. ~/.profile
@@ -17,8 +17,6 @@ HIST_STAMPS="dd/mm/yyyy"
 
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-plugins=(zsh-syntax-highlighting)
-
 # Set defaults for SSH connections
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     ZSH_THEME="masalaprompt-ssh" && source ~/.oh-my-zsh/oh-my-zsh.sh
@@ -26,6 +24,12 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
 else
     ZSH_THEME="masalaprompt" && source ~/.oh-my-zsh/oh-my-zsh.sh
     export EDITOR='nvim'
+fi
+
+# Bookmarks
+if [ -d "$HOME/.bookmarks" ]; then
+    export CDPATH=".:$HOME/.bookmarks:/"
+    alias goto="cd -P"
 fi
 
 # Lazy git bindings
@@ -42,7 +46,7 @@ alias gdiff="git status -s \
 alias rr="ranger"
 alias nn="nvim"
 alias mm="mutt"
-alias cls="clear"
+alias cl="clear"
 alias jl="jupyter-lab"
 alias ytdl="yt-dlp"
 alias teams="teams-for-linux"
@@ -111,7 +115,7 @@ rss_add(){
   builtin cd $1
 
   if [[ -d ./env ]] ; then
-    . ./env/bin/activate
+# . ./env/bin/activate  # commented out by conda initialize
   fi
 }
 
@@ -132,4 +136,18 @@ export MANROFFOPT="-P -c"
 #bindkey -s '^o' 'rangercd^M'
 
 alias dwarffortress=/home/ayush/.dwarffortress/dfhack
+alias dft="cd ~/Thesis/simulations"
+alias bcl="bc -l"
 
+source /home/ayush/.oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#conda for batoms
+export CRYPTOGRAPHY_OPENSSL_NO_LEGACY=1
+
+function pbu () {
+    CURR_SSID=$(nmcli -t -f active,ssid dev wifi | grep yes | awk -F ":" '{print $2}')
+    if [[ $CURR_SSID == "Students" ]]; then
+        scp -r $1 pb:/scratch/pghosh/ayush/testing/
+    else
+        scp -r $1 pbe:/scratch/pghosh/ayush/testing/
+    fi
+}

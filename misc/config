@@ -1,5 +1,5 @@
 # VCS
-#
+# 
 Host aur.archlinux.org
   IdentityFile ~/.ssh/aur
   User aur
@@ -28,6 +28,7 @@ Host gauss
 Host cantor
     Hostname cantor.cas.usf.edu
     User ayush
+    IdentityFile ~/.ssh/id
 #
 # Compute | RTX 3090Ti
 Host csmlab1
@@ -48,3 +49,40 @@ Host csmlab4
 Host csmlab5
     Hostname csmlab5.cas.usf.edu
     User ayush
+
+# IISERP CMS Lab
+#
+# C18 Workstation (JRF)
+Host bragg
+    Hostname 172.16.14.47
+    User ayush
+    IdentityFile ~/.ssh/snb
+
+# Google Cloud
+#
+Host minicoy
+    Hostname 35.212.233.234
+    User ayush_shenoy92
+    IdentityFile ~/.ssh/id
+
+# IISERP CMS Lab
+#
+# PARAM BRAHMA | IISER PUNE
+Host pb
+    Hostname 192.168.1.230
+    User pghosh
+    UserKnownHostsFile /dev/null
+Host pbe
+    Hostname parambrahma.iiserpune.ac.in
+    User pghosh
+    Port 4422
+    UserKnownHostsFile /dev/null
+    ServerAliveInterval 240
+
+###########################
+#
+# PG2 (Sarika) | 12 Core Xeon
+Host pg2
+    Hostname 192.168.8.143
+    User sarika
+    IdentityFile ~/.ssh/pglab

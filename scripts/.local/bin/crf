@@ -1,0 +1,37 @@
+#!/bin/sh
+# Ramshackle Fortran90 build tool for MCP code
+
+
+cleanbf () {
+echo -e "Clean build files>" >&2
+rm -f ../common/*.mod 
+rm -f ../common/*.o 
+rm -f ./*.o 
+rm -f ./*.mod 
+}
+
+echo -e "------CRF------" >&2
+cd ../common
+for file in ./*.f90
+do 
+    echo -e "Compile module> $file" >&2
+    gfortran -c $file
+done
+cd - > /dev/null
+
+echo "Compile main> $1.f90" >&2
+gfortran -c "./$1.f90" -I ../common
+
+echo -e "Modules:" >&2
+libs=""
+for file in ../common/*.o
+do 
+    libs="${libs} $file"
+    echo -e "] $file" >&2
+done
+echo -e "Linking> $1.x" >&2
+gfortran -o $1.x ./$1.o $libs && cleanbf
+echo -e "---------------\n\n" >&2
+./$1.x
+
+#gfortran  "./$1.f90" -o "./$1.x" && "./$1.x"

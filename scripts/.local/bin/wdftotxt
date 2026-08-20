@@ -1,0 +1,127 @@
+#!/bin/sh
+
+usage="$(basename "$0") [OPTION]... [FILE]...
+Batch converts .wdf files to .txt format, then stores all files in a single output directory. Output files will retain the directory hierarchy of input files.
+Arguments:
+	-h
+		show this help message and exit
+	-f
+		filters out files that do not end in .wdf
+	-o DIR
+		changes the output directory to DIR
+	-r
+		recursively convert files of any input directories 
+	-u
+		output will be unhierarchical i.e. will not retain the hierarchy of input files
+
+Author: Justin He"
+ 
+# Parse arguments
+filter=false
+outdir=""
+recur=false
+hier=true
+while getopts "fho:ru" opt; do
+	case $opt in
+		f)
+			filter=true
+			;;
+		h)
+			echo "$usage"
+			exit 0
+			;;
+		o)
+			echo $OPTARG
+			outdir="$OPTARG"
+			;;
+		r)
+			recur=true
+			;;
+		u)
+			hier=false
+			;;
+		\?)
+			exit 1
+			;;
+	esac 
+done
+shift "$((OPTIND-1))"
+
+
+# If no files provided, exit
+if [ $# -eq 0 ];
+then
+	echo "No files provided"
+	exit 1
+fi
+
+# Find first valid directory name if dir not specified
+if [ "$outdir" = "" ];
+then
+	LSOUT="$(ls -ld * | grep -E "wdfout[0-9]+")"
+	n=0
+	while [ $(echo $LSOUT | grep "wdfout$n" | wc -l) -gt 0 ]
+	do
+		((n++))
+	done
+
+	outdir="./wdfout$n"
+fi
+
+# Define function for recursion
+recursive_convert()
+{
+	local dir="$1"
+	input="$(ls $dir)"
+	if [ "$hier" = true ];
+	then
+		local parentdir="$outdir/$dir"
+	else
+		local parentdir="$outdir"
+	fi
+
+	for file in $input
+	do
+		if [ -d "$dir/$file" ];
+		then
+			recursive_convert "$dir/$file"
+		elif [ "$filter" = false ] || [ "$( echo $file | grep ".wdf$" | wc -l )" -gt 0 ];
+		then
+			((i++))
+			echo "$i\t$dir/$file"
+			WDFOUT="$(wdfconvert -p $parentdir $dir/$file 2>&1 >/dev/null)" 
+			if [ $? -ne 0 ];
+			then
+				((i--))
+				echo "$WDFOUT"
+			fi
+		fi
+		
+	done;
+}
+
+# Parse files and convert each one from wdf to txt
+echo "Converting..."
+i=0
+for file in "$@"
+do
+	if [ "$recur" = true ] && [ -d "$file" ];
+	then
+		recursive_convert "$file"
+	elif [ "$filter" = false ] || [ "$( echo $file | grep ".wdf$" | wc -l )" -gt 0 ];
+	then
+		((i++))
+		echo "$i\t$file"
+		WDFOUT="$(wdfconvert -p $outdir $file 2>&1 >/dev/null)" 
+		if [ $? -ne 0 ];
+		then
+			((i--))
+			echo "$WDFOUT"
+			# exit 1
+		fi
+	fi
+	
+done 
+
+echo "Converted $i files."
+exit 0

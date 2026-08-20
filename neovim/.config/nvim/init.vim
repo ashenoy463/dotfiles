@@ -83,6 +83,9 @@ hi Pmenu ctermbg=Blue
 hi! Conceal ctermfg=White
 hi Conceal cterm=bold
 
+" Syntax
+au BufWinEnter,BufRead,BufNewFile *.pwtk set filetype=tcl
+
 " Misc
 set hidden
 set mouse=a
@@ -277,11 +280,18 @@ let g:vimtex_toc_config = {
             \ 'show_numbers' : 1,
             \ 'mode' : 2,
             \}
+"let g:vimtex_compiler_latexmk = {
+            "\ 'options' : [
+            "\   '-shell-escape',
+            "\   '-bibtex',
+            "\ ],
+            "\}
 
 " LaTeX/Markdown live previews
 autocmd Filetype markdown nnoremap <silent> <leader>v :lua require("knap").toggle_autopreviewing()<CR>
 autocmd Filetype rmd nnoremap <silent> <leader>v :lua require("knap").toggle_autopreviewing()<CR>
-autocmd Filetype tex nnoremap <silent> <leader>v :VimtexCompile<CR>
+"autocmd Filetype tex nnoremap <silent> <leader>v :VimtexCompile<CR>
+autocmd Filetype tex nnoremap <silent> <leader>v :lua require("knap").toggle_autopreviewing()<CR>
 let g:knap_settings = {
     \ "textopdfviewerlaunch": "zathura --synctex-editor-command 'nvim --headless -es --cmd \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%{input}'\"'\"',%{line},0)\"' %outputfile%",
     \ "textopdfviewerrefresh": "none",
