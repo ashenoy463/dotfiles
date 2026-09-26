@@ -1,37 +1,28 @@
 export PATH=$HOME/.local/bin/:$HOME/go:$HOME/.local/share/gem/ruby/3.0.0/bin:/usr/local/bin:$PATH
 ZSH_DISABLE_COMPFIX="true"
 
-#. ~/.profile
-#. "$HOME/.cache/wal/colors.sh"
-
-export ZSH=$HOME/.oh-my-zsh
-
 CASE_SENSITIVE="true"
 # HYPHEN_INSENSITIVE="true"
-
-export UPDATE_ZSH_DAYS=14
-
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 HIST_STAMPS="dd/mm/yyyy"
 
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Set defaults for SSH connections
-if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-    ZSH_THEME="masalaprompt-ssh" && source ~/.oh-my-zsh/oh-my-zsh.sh
-    export EDITOR='vim'
-else
-    ZSH_THEME="masalaprompt" && source ~/.oh-my-zsh/oh-my-zsh.sh
-    export EDITOR='nvim'
+# Use powerline
+USE_POWERLINE="true"
+# Has weird character width
+# Example:
+#    is not a diamond
+HAS_WIDECHARS="false"
+# Source manjaro-zsh-configuration
+if [[ -e /usr/share/zsh/manjaro-zsh-config ]]; then
+  source /usr/share/zsh/manjaro-zsh-config
 fi
-
-# Bookmarks
-if [ -d "$HOME/.bookmarks" ]; then
-    export CDPATH=".:$HOME/.bookmarks:/"
-    alias goto="cd -P"
+unsetopt correct
+# Use manjaro zsh prompt
+if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
+  source /usr/share/zsh/manjaro-zsh-prompt
 fi
-
+#
 # Lazy git bindings
 alias ggrph="git log --graph"
 alias gstat="git status"
@@ -43,12 +34,10 @@ alias gdiff="git status -s \
  --preview-window=right:60%:wrap"
 
 # Lazy app bindings
-alias rr="ranger"
+alias rr="lf"
 alias nn="nvim"
+alias vim="nvim"
 alias mm="mutt"
-alias cl="clear"
-alias jl="jupyter-lab"
-alias ytdl="yt-dlp"
 alias teams="teams-for-linux"
 alias ncmpcpp="ncmpcpp 2> /dev/null"
 
@@ -77,12 +66,6 @@ function buildaur() {
 alias -s pdf=zathura
 alias -s epub=zathura
 
-function copy() {
-    "$@" | xclip -selection c
-}
-
-alias mpc="mpc --host $MPD_HOST --port $MPD_PORT"
-
 unsetopt PROMPT_SP
 
 export SHELL="/usr/bin/zsh"
@@ -97,15 +80,6 @@ gibraltar_theme(){
     $HOME/.local/bin/i3start.sh
 }
 
-# Add rss to newsboat
-rss_add(){
-    if [ $2 != "" ]
-    then
-        tags=$(echo $2 | sed "s/,/ /g")
-        echo $tags
-        echo "${1} \"${tags}\"" >> $HOME/.config/newsboat/urls
-    fi
-}
 
  function cd() {
   if [[ -d ./env ]] ; then
@@ -123,30 +97,15 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 
-# Display manager
-if [ "$TERM" = "linux" ]; then
-    tbsm
-fi
-
 # Colored manpages
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
 export MANROFFOPT="-P -c"
 
-#alias rangercd='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
-#bindkey -s '^o' 'rangercd^M'
-
 alias dwarffortress=/home/ayush/.dwarffortress/dfhack
 alias bcl="bc -l"
 
-source /home/ayush/.oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 export CRYPTOGRAPHY_OPENSSL_NO_LEGACY=1
 
-#function pbu () {
-#    CURR_SSID=$(nmcli -t -f active,ssid dev wifi | grep yes | awk -F ":" '{print $2}')
-#    if [[ $CURR_SSID == "Students" ]]; then
-#        scp -r $1 pb:/scratch/pghosh/ayush/testing/
-#    else
-#        scp -r $1 pbe:/scratch/pghosh/ayush/testing/
-#    fi
-#}
+export EDITOR="/usr/bin/nvim"
+export OPENER="rifle"
+export GNUPGHOME="$HOME/.local/share/gnupg"
