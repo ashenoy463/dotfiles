@@ -1,0 +1,30 @@
+[font]
+size = 11
+
+[font.normal]
+family = "RobotoMono Nerd Font Mono"
+style = "Medium"
+
+[colors.primary]
+background = "#181818" # Your GNOME Terminal BG
+foreground = "#d8d8d8" # Your GNOME Terminal FG
+
+[colors.normal]
+black   = "#171421"
+red     = "#C01C28"
+green   = "#26A269"
+yellow  = "#A2734C"
+blue    = "#12488B"
+magenta = "#A347BA"
+cyan    = "#2AA1B3"
+white   = "#D0CFCC"
+
+[colors.bright]
+black   = "#5E5C64"
+red     = "#F66151"
+green   = "#33D17A"
+yellow  = "#E9AD0C"
+blue    = "#2A7BDE"
+magenta = "#C061CB"
+cyan    = "#33C7DE"
+white   = "#FFFFFF"
