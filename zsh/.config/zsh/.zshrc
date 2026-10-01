@@ -1,3 +1,12 @@
+export ZDOTDIR=$HOME/.config/zsh
+
+# Use XDG dirs for completion and history files
+[ -d "$XDG_STATE_HOME"/zsh ] || mkdir -p "$XDG_STATE_HOME"/zsh
+HISTFILE="$XDG_STATE_HOME"/zsh/history
+[ -d "$XDG_CACHE_HOME"/zsh ] || mkdir -p "$XDG_CACHE_HOME"/zsh
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
+compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$ZSH_VERSION
+
 export PATH=$HOME/.local/bin/:$HOME/go:$HOME/.local/share/gem/ruby/3.0.0/bin:/usr/local/bin:$PATH
 ZSH_DISABLE_COMPFIX="true"
 
@@ -109,3 +118,17 @@ export CRYPTOGRAPHY_OPENSSL_NO_LEGACY=1
 export EDITOR="/usr/bin/nvim"
 export OPENER="rifle"
 export GNUPGHOME="$HOME/.local/share/gnupg"
+
+#bindkey -v main
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS' --color=fg:-1,bg:#181818,hl:#12488b --color=fg+:#d0d0d0,bg+:#262626,hl+:#2a7bde --color=info:#a2734c,prompt:#c01c28,pointer:#a347ba --color=marker:#e9ad0c,spinner:#26a269,header:#26a269'
+
+export FZF_DEFAULT_COMMAND='rg --files --hidden'
+
+function _fzfopen {
+    zle push-input
+    BUFFER="fzf --walker-root='$HOME' --style minimal --height 40% --bind 'enter:become( rifle {} || xdg-open {})'"
+    zle accept-line
+}
+
+zle -N _fzfopen
+bindkey '^o' _fzfopen
